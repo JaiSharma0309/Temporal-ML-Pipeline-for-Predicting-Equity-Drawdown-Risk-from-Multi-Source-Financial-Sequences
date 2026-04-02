@@ -1,0 +1,564 @@
+symbol,raw_symbol,company,sector,sub_industry,country,market_benchmark,sector_benchmark
+ABX.TO,ABX,Barrick Mining Corporation,Basic Materials,,CA,XIU.TO,XMA.TO
+AEM.TO,AEM,Agnico Eagle Mines Limited,Basic Materials,,CA,XIU.TO,XMA.TO
+ATD.TO,ATD,Alimentation Couche-Tard Inc.,Consumer Cyclical,,CA,XIU.TO,XIU.TO
+BAM.TO,BAM,Brookfield Asset Management Ltd.,Financial Services,,CA,XIU.TO,XFN.TO
+BCE.TO,BCE,BCE Inc.,Communication Services,,CA,XIU.TO,XTL.TO
+BIP.UN.TO,BIP.UN,Brookfield Infrastructure Partners L.P.,Utilities,,CA,XIU.TO,XUT.TO
+BMO.TO,BMO,Bank of Montreal,Financial Services,,CA,XIU.TO,XFN.TO
+BN.TO,BN,Brookfield Corporation,Financial Services,,CA,XIU.TO,XFN.TO
+BNS.TO,BNS,Bank of Nova Scotia,Financial Services,,CA,XIU.TO,XFN.TO
+CAE.TO,CAE,CAE Inc.,Industrials,,CA,XIU.TO,XIN.TO
+CCL.B.TO,CCL.B,CCL Industries Inc.,Consumer Cyclical,,CA,XIU.TO,XIU.TO
+CCO.TO,CCO,Cameco Corporation,Energy,,CA,XIU.TO,XEG.TO
+CLS.TO,CLS,Celestica Inc.,Information Technology,,CA,XIU.TO,XIT.TO
+CM.TO,CM,Canadian Imperial Bank of Commerce,Financial Services,,CA,XIU.TO,XFN.TO
+CNQ.TO,CNQ,Canadian Natural Resources Limited,Energy,,CA,XIU.TO,XEG.TO
+CNR.TO,CNR,Canadian National Railway Company,Industrials,,CA,XIU.TO,XIN.TO
+CP.TO,CP,Canadian Pacific Kansas City Limited,Industrials,,CA,XIU.TO,XIN.TO
+CSU.TO,CSU,Constellation Software Inc.,Information Technology,,CA,XIU.TO,XIT.TO
+CTC.A.TO,CTC.A,Canadian Tire Corporation Limited,Consumer Cyclical,,CA,XIU.TO,XIU.TO
+CVE.TO,CVE,Cenovus Energy Inc.,Energy,,CA,XIU.TO,XEG.TO
+DOL.TO,DOL,Dollarama Inc.,Consumer Staples,,CA,XIU.TO,XST.TO
+EMA.TO,EMA,Emera Incorporated,Utilities,,CA,XIU.TO,XUT.TO
+ENB.TO,ENB,Enbridge Inc.,Energy,,CA,XIU.TO,XEG.TO
+FFH.TO,FFH,Fairfax Financial Holdings Limited,Financial Services,,CA,XIU.TO,XFN.TO
+FM.TO,FM,First Quantum Minerals Ltd.,Basic Materials,,CA,XIU.TO,XMA.TO
+FNV.TO,FNV,Franco-Nevada Corporation,Basic Materials,,CA,XIU.TO,XMA.TO
+FSV.TO,FSV,FirstService Corporation,Real Estate,,CA,XIU.TO,XRE.TO
+FTS.TO,FTS,Fortis Inc.,Utilities,,CA,XIU.TO,XUT.TO
+GIB.A.TO,GIB.A,CGI Inc.,Information Technology,,CA,XIU.TO,XIT.TO
+GIL.TO,GIL,Gildan Activewear Inc.,Consumer Cyclical,,CA,XIU.TO,XIU.TO
+H.TO,H,Hydro One Limited,Utilities,,CA,XIU.TO,XUT.TO
+IFC.TO,IFC,Intact Financial Corporation,Financial Services,,CA,XIU.TO,XFN.TO
+IMO.TO,IMO,Imperial Oil Limited,Energy,,CA,XIU.TO,XEG.TO
+K.TO,K,Kinross Gold Corporation,Basic Materials,,CA,XIU.TO,XMA.TO
+L.TO,L,Loblaw Companies Limited,Consumer Staples,,CA,XIU.TO,XST.TO
+MFC.TO,MFC,Manulife Financial Corporation,Financial Services,,CA,XIU.TO,XFN.TO
+MG.TO,MG,Magna International Inc.,Consumer Cyclical,,CA,XIU.TO,XIU.TO
+MRU.TO,MRU,Metro Inc.,Consumer Staples,,CA,XIU.TO,XST.TO
+NTR.TO,NTR,Nutrien Ltd.,Basic Materials,,CA,XIU.TO,XMA.TO
+OTEX.TO,OTEX,Open Text Corporation,Information Technology,,CA,XIU.TO,XIT.TO
+POW.TO,POW,Power Corporation of Canada,Financial Services,,CA,XIU.TO,XFN.TO
+PPL.TO,PPL,Pembina Pipeline Corporation,Energy,,CA,XIU.TO,XEG.TO
+QSR.TO,QSR,Restaurant Brands International Inc.,Consumer Cyclical,,CA,XIU.TO,XIU.TO
+RCI.B.TO,RCI.B,Rogers Communications Inc.,Communication Services,,CA,XIU.TO,XTL.TO
+RY.TO,RY,Royal Bank of Canada,Financial Services,,CA,XIU.TO,XFN.TO
+SAP.TO,SAP,Saputo Inc.,Consumer Staples,,CA,XIU.TO,XST.TO
+SHOP.TO,SHOP,Shopify Inc.,Information Technology,,CA,XIU.TO,XIT.TO
+SLF.TO,SLF,Sun Life Financial Inc.,Financial Services,,CA,XIU.TO,XFN.TO
+SU.TO,SU,Suncor Energy Inc.,Energy,,CA,XIU.TO,XEG.TO
+T.TO,T,Telus Corporation,Communication Services,,CA,XIU.TO,XTL.TO
+TD.TO,TD,Toronto-Dominion Bank,Financial Services,,CA,XIU.TO,XFN.TO
+TECK.B.TO,TECK.B,Teck Resources Limited,Basic Materials,,CA,XIU.TO,XMA.TO
+TOU.TO,TOU,Tourmaline Oil Corp.,Energy,,CA,XIU.TO,XEG.TO
+TRI.TO,TRI,Thomson Reuters Corporation,Industrials,,CA,XIU.TO,XIN.TO
+TRP.TO,TRP,TC Energy Corporation,Energy,,CA,XIU.TO,XEG.TO
+WCN.TO,WCN,Waste Connections Inc.,Industrials,,CA,XIU.TO,XIN.TO
+WN.TO,WN,George Weston Limited,Consumer Staples,,CA,XIU.TO,XST.TO
+WPM.TO,WPM,Wheaton Precious Metals Corp.,Basic Materials,,CA,XIU.TO,XMA.TO
+WSP.TO,WSP,WSP Global Inc.,Industrials,,CA,XIU.TO,XIN.TO
+nan.TO,,National Bank of Canada,Financial Services,,CA,XIU.TO,XFN.TO
+A,A,Agilent Technologies,Health Care,Life Sciences Tools & Services,US,SPY,XLV
+AAPL,AAPL,Apple Inc.,Information Technology,"Technology Hardware, Storage & Peripherals",US,SPY,XLK
+ABBV,ABBV,AbbVie,Health Care,Biotechnology,US,SPY,XLV
+ABNB,ABNB,Airbnb,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",US,SPY,XLY
+ABT,ABT,Abbott Laboratories,Health Care,Health Care Equipment,US,SPY,XLV
+ACGL,ACGL,Arch Capital Group,Financials,Property & Casualty Insurance,US,SPY,XLF
+ACN,ACN,Accenture,Information Technology,IT Consulting & Other Services,US,SPY,XLK
+ADBE,ADBE,Adobe Inc.,Information Technology,Application Software,US,SPY,XLK
+ADI,ADI,Analog Devices,Information Technology,Semiconductors,US,SPY,XLK
+ADM,ADM,Archer Daniels Midland,Consumer Staples,Agricultural Products & Services,US,SPY,XLP
+ADP,ADP,Automatic Data Processing,Industrials,Human Resource & Employment Services,US,SPY,XLI
+ADSK,ADSK,Autodesk,Information Technology,Application Software,US,SPY,XLK
+AEE,AEE,Ameren,Utilities,Multi-Utilities,US,SPY,XLU
+AEP,AEP,American Electric Power,Utilities,Electric Utilities,US,SPY,XLU
+AES,AES,AES Corporation,Utilities,Independent Power Producers & Energy Traders,US,SPY,XLU
+AFL,AFL,Aflac,Financials,Life & Health Insurance,US,SPY,XLF
+AIG,AIG,American International Group,Financials,Multi-line Insurance,US,SPY,XLF
+AIZ,AIZ,Assurant,Financials,Multi-line Insurance,US,SPY,XLF
+AJG,AJG,Arthur J. Gallagher & Co.,Financials,Insurance Brokers,US,SPY,XLF
+AKAM,AKAM,Akamai Technologies,Information Technology,Internet Services & Infrastructure,US,SPY,XLK
+ALB,ALB,Albemarle Corporation,Materials,Specialty Chemicals,US,SPY,XLB
+ALGN,ALGN,Align Technology,Health Care,Health Care Supplies,US,SPY,XLV
+ALL,ALL,Allstate,Financials,Property & Casualty Insurance,US,SPY,XLF
+ALLE,ALLE,Allegion,Industrials,Building Products,US,SPY,XLI
+AMAT,AMAT,Applied Materials,Information Technology,Semiconductor Materials & Equipment,US,SPY,XLK
+AMCR,AMCR,Amcor,Materials,Paper & Plastic Packaging Products & Materials,US,SPY,XLB
+AMD,AMD,Advanced Micro Devices,Information Technology,Semiconductors,US,SPY,XLK
+AME,AME,Ametek,Industrials,Electrical Components & Equipment,US,SPY,XLI
+AMGN,AMGN,Amgen,Health Care,Biotechnology,US,SPY,XLV
+AMP,AMP,Ameriprise Financial,Financials,Asset Management & Custody Banks,US,SPY,XLF
+AMT,AMT,American Tower,Real Estate,Telecom Tower REITs,US,SPY,XLRE
+AMZN,AMZN,Amazon,Consumer Discretionary,Broadline Retail,US,SPY,XLY
+ANET,ANET,Arista Networks,Information Technology,Communications Equipment,US,SPY,XLK
+AON,AON,Aon plc,Financials,Insurance Brokers,US,SPY,XLF
+AOS,AOS,A. O. Smith,Industrials,Building Products,US,SPY,XLI
+APA,APA,APA Corporation,Energy,Oil & Gas Exploration & Production,US,SPY,XLE
+APD,APD,Air Products,Materials,Industrial Gases,US,SPY,XLB
+APH,APH,Amphenol,Information Technology,Electronic Components,US,SPY,XLK
+APO,APO,Apollo Global Management,Financials,Asset Management & Custody Banks,US,SPY,XLF
+APP,APP,AppLovin,Information Technology,Application Software,US,SPY,XLK
+APTV,APTV,Aptiv,Consumer Discretionary,Automotive Parts & Equipment,US,SPY,XLY
+ARE,ARE,Alexandria Real Estate Equities,Real Estate,Office REITs,US,SPY,XLRE
+ARES,ARES,Ares Management,Financials,Asset Management & Custody Banks,US,SPY,XLF
+ATO,ATO,Atmos Energy,Utilities,Gas Utilities,US,SPY,XLU
+AVB,AVB,AvalonBay Communities,Real Estate,Multi-Family Residential REITs,US,SPY,XLRE
+AVGO,AVGO,Broadcom,Information Technology,Semiconductors,US,SPY,XLK
+AVY,AVY,Avery Dennison,Materials,Paper & Plastic Packaging Products & Materials,US,SPY,XLB
+AWK,AWK,American Water Works,Utilities,Water Utilities,US,SPY,XLU
+AXON,AXON,Axon Enterprise,Industrials,Aerospace & Defense,US,SPY,XLI
+AXP,AXP,American Express,Financials,Consumer Finance,US,SPY,XLF
+AZO,AZO,AutoZone,Consumer Discretionary,Automotive Retail,US,SPY,XLY
+BA,BA,Boeing,Industrials,Aerospace & Defense,US,SPY,XLI
+BAC,BAC,Bank of America,Financials,Diversified Banks,US,SPY,XLF
+BALL,BALL,Ball Corporation,Materials,"Metal, Glass & Plastic Containers",US,SPY,XLB
+BAX,BAX,Baxter International,Health Care,Health Care Equipment,US,SPY,XLV
+BBY,BBY,Best Buy,Consumer Discretionary,Computer & Electronics Retail,US,SPY,XLY
+BDX,BDX,Becton Dickinson,Health Care,Health Care Equipment,US,SPY,XLV
+BEN,BEN,Franklin Resources,Financials,Asset Management & Custody Banks,US,SPY,XLF
+BF-B,BF.B,Brown–Forman,Consumer Staples,Distillers & Vintners,US,SPY,XLP
+BG,BG,Bunge Global,Consumer Staples,Agricultural Products & Services,US,SPY,XLP
+BIIB,BIIB,Biogen,Health Care,Biotechnology,US,SPY,XLV
+BK,BK,BNY Mellon,Financials,Asset Management & Custody Banks,US,SPY,XLF
+BKNG,BKNG,Booking Holdings,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",US,SPY,XLY
+BKR,BKR,Baker Hughes,Energy,Oil & Gas Equipment & Services,US,SPY,XLE
+BLDR,BLDR,Builders FirstSource,Industrials,Building Products,US,SPY,XLI
+BLK,BLK,BlackRock,Financials,Asset Management & Custody Banks,US,SPY,XLF
+BMY,BMY,Bristol Myers Squibb,Health Care,Pharmaceuticals,US,SPY,XLV
+BR,BR,Broadridge Financial Solutions,Industrials,Data Processing & Outsourced Services,US,SPY,XLI
+BRK-B,BRK.B,Berkshire Hathaway,Financials,Multi-Sector Holdings,US,SPY,XLF
+BRO,BRO,Brown & Brown,Financials,Insurance Brokers,US,SPY,XLF
+BSX,BSX,Boston Scientific,Health Care,Health Care Equipment,US,SPY,XLV
+BX,BX,Blackstone Inc.,Financials,Asset Management & Custody Banks,US,SPY,XLF
+BXP,BXP,"BXP, Inc.",Real Estate,Office REITs,US,SPY,XLRE
+C,C,Citigroup,Financials,Diversified Banks,US,SPY,XLF
+CAG,CAG,Conagra Brands,Consumer Staples,Packaged Foods & Meats,US,SPY,XLP
+CAH,CAH,Cardinal Health,Health Care,Health Care Distributors,US,SPY,XLV
+CARR,CARR,Carrier Global,Industrials,Building Products,US,SPY,XLI
+CAT,CAT,Caterpillar Inc.,Industrials,Construction Machinery & Heavy Transportation Equipment,US,SPY,XLI
+CB,CB,Chubb Limited,Financials,Property & Casualty Insurance,US,SPY,XLF
+CBOE,CBOE,Cboe Global Markets,Financials,Financial Exchanges & Data,US,SPY,XLF
+CBRE,CBRE,CBRE Group,Real Estate,Real Estate Services,US,SPY,XLRE
+CCI,CCI,Crown Castle,Real Estate,Telecom Tower REITs,US,SPY,XLRE
+CCL,CCL,Carnival,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",US,SPY,XLY
+CDNS,CDNS,Cadence Design Systems,Information Technology,Application Software,US,SPY,XLK
+CDW,CDW,CDW Corporation,Information Technology,Technology Distributors,US,SPY,XLK
+CEG,CEG,Constellation Energy,Utilities,Electric Utilities,US,SPY,XLU
+CF,CF,CF Industries,Materials,Fertilizers & Agricultural Chemicals,US,SPY,XLB
+CFG,CFG,Citizens Financial Group,Financials,Regional Banks,US,SPY,XLF
+CHD,CHD,Church & Dwight,Consumer Staples,Household Products,US,SPY,XLP
+CHRW,CHRW,C.H. Robinson,Industrials,Air Freight & Logistics,US,SPY,XLI
+CHTR,CHTR,Charter Communications,Communication Services,Cable & Satellite,US,SPY,XLC
+CI,CI,Cigna,Health Care,Health Care Services,US,SPY,XLV
+CIEN,CIEN,Ciena,Information Technology,Communications Equipment,US,SPY,XLK
+CINF,CINF,Cincinnati Financial,Financials,Property & Casualty Insurance,US,SPY,XLF
+CL,CL,Colgate-Palmolive,Consumer Staples,Household Products,US,SPY,XLP
+CLX,CLX,Clorox,Consumer Staples,Household Products,US,SPY,XLP
+CMCSA,CMCSA,Comcast,Communication Services,Cable & Satellite,US,SPY,XLC
+CME,CME,CME Group,Financials,Financial Exchanges & Data,US,SPY,XLF
+CMG,CMG,Chipotle Mexican Grill,Consumer Discretionary,Restaurants,US,SPY,XLY
+CMI,CMI,Cummins,Industrials,Construction Machinery & Heavy Transportation Equipment,US,SPY,XLI
+CMS,CMS,CMS Energy,Utilities,Multi-Utilities,US,SPY,XLU
+CNC,CNC,Centene Corporation,Health Care,Managed Health Care,US,SPY,XLV
+CNP,CNP,CenterPoint Energy,Utilities,Multi-Utilities,US,SPY,XLU
+COF,COF,Capital One,Financials,Consumer Finance,US,SPY,XLF
+COHR,COHR,Coherent Corp.,Information Technology,Electronic Components,US,SPY,XLK
+COIN,COIN,Coinbase,Financials,Financial Exchanges & Data,US,SPY,XLF
+COO,COO,Cooper Companies (The),Health Care,Health Care Supplies,US,SPY,XLV
+COP,COP,ConocoPhillips,Energy,Oil & Gas Exploration & Production,US,SPY,XLE
+COR,COR,Cencora,Health Care,Health Care Distributors,US,SPY,XLV
+COST,COST,Costco,Consumer Staples,Consumer Staples Merchandise Retail,US,SPY,XLP
+CPAY,CPAY,Corpay,Financials,Transaction & Payment Processing Services,US,SPY,XLF
+CPB,CPB,Campbell's Company (The),Consumer Staples,Packaged Foods & Meats,US,SPY,XLP
+CPRT,CPRT,Copart,Industrials,Diversified Support Services,US,SPY,XLI
+CPT,CPT,Camden Property Trust,Real Estate,Multi-Family Residential REITs,US,SPY,XLRE
+CRH,CRH,CRH plc,Materials,Construction Materials,US,SPY,XLB
+CRL,CRL,Charles River Laboratories,Health Care,Life Sciences Tools & Services,US,SPY,XLV
+CRM,CRM,Salesforce,Information Technology,Application Software,US,SPY,XLK
+CRWD,CRWD,CrowdStrike,Information Technology,Systems Software,US,SPY,XLK
+CSCO,CSCO,Cisco,Information Technology,Communications Equipment,US,SPY,XLK
+CSGP,CSGP,CoStar Group,Real Estate,Real Estate Services,US,SPY,XLRE
+CSX,CSX,CSX Corporation,Industrials,Rail Transportation,US,SPY,XLI
+CTAS,CTAS,Cintas,Industrials,Diversified Support Services,US,SPY,XLI
+CTRA,CTRA,Coterra,Energy,Oil & Gas Exploration & Production,US,SPY,XLE
+CTSH,CTSH,Cognizant,Information Technology,IT Consulting & Other Services,US,SPY,XLK
+CTVA,CTVA,Corteva,Materials,Fertilizers & Agricultural Chemicals,US,SPY,XLB
+CVNA,CVNA,Carvana,Consumer Discretionary,Automotive Retail,US,SPY,XLY
+CVS,CVS,CVS Health,Health Care,Health Care Services,US,SPY,XLV
+CVX,CVX,Chevron Corporation,Energy,Integrated Oil & Gas,US,SPY,XLE
+D,D,Dominion Energy,Utilities,Multi-Utilities,US,SPY,XLU
+DAL,DAL,Delta Air Lines,Industrials,Passenger Airlines,US,SPY,XLI
+DASH,DASH,DoorDash,Consumer Discretionary,Specialized Consumer Services,US,SPY,XLY
+DD,DD,DuPont,Materials,Specialty Chemicals,US,SPY,XLB
+DDOG,DDOG,Datadog,Information Technology,Application Software,US,SPY,XLK
+DE,DE,Deere & Company,Industrials,Agricultural & Farm Machinery,US,SPY,XLI
+DECK,DECK,Deckers Brands,Consumer Discretionary,Footwear,US,SPY,XLY
+DELL,DELL,Dell Technologies,Information Technology,"Technology Hardware, Storage & Peripherals",US,SPY,XLK
+DG,DG,Dollar General,Consumer Staples,Consumer Staples Merchandise Retail,US,SPY,XLP
+DGX,DGX,Quest Diagnostics,Health Care,Health Care Services,US,SPY,XLV
+DHI,DHI,D. R. Horton,Consumer Discretionary,Homebuilding,US,SPY,XLY
+DHR,DHR,Danaher Corporation,Health Care,Life Sciences Tools & Services,US,SPY,XLV
+DIS,DIS,Walt Disney Company (The),Communication Services,Movies & Entertainment,US,SPY,XLC
+DLR,DLR,Digital Realty,Real Estate,Data Center REITs,US,SPY,XLRE
+DLTR,DLTR,Dollar Tree,Consumer Staples,Consumer Staples Merchandise Retail,US,SPY,XLP
+DOC,DOC,Healthpeak Properties,Real Estate,Health Care REITs,US,SPY,XLRE
+DOV,DOV,Dover Corporation,Industrials,Industrial Machinery & Supplies & Components,US,SPY,XLI
+DOW,DOW,Dow Inc.,Materials,Commodity Chemicals,US,SPY,XLB
+DPZ,DPZ,Domino's,Consumer Discretionary,Restaurants,US,SPY,XLY
+DRI,DRI,Darden Restaurants,Consumer Discretionary,Restaurants,US,SPY,XLY
+DTE,DTE,DTE Energy,Utilities,Multi-Utilities,US,SPY,XLU
+DUK,DUK,Duke Energy,Utilities,Electric Utilities,US,SPY,XLU
+DVA,DVA,DaVita,Health Care,Health Care Services,US,SPY,XLV
+DVN,DVN,Devon Energy,Energy,Oil & Gas Exploration & Production,US,SPY,XLE
+DXCM,DXCM,Dexcom,Health Care,Health Care Equipment,US,SPY,XLV
+EA,EA,Electronic Arts,Communication Services,Interactive Home Entertainment,US,SPY,XLC
+EBAY,EBAY,eBay Inc.,Consumer Discretionary,Broadline Retail,US,SPY,XLY
+ECL,ECL,Ecolab,Materials,Specialty Chemicals,US,SPY,XLB
+ED,ED,Consolidated Edison,Utilities,Multi-Utilities,US,SPY,XLU
+EFX,EFX,Equifax,Industrials,Research & Consulting Services,US,SPY,XLI
+EG,EG,Everest Group,Financials,Reinsurance,US,SPY,XLF
+EIX,EIX,Edison International,Utilities,Electric Utilities,US,SPY,XLU
+EL,EL,Estée Lauder Companies (The),Consumer Staples,Personal Care Products,US,SPY,XLP
+ELV,ELV,Elevance Health,Health Care,Managed Health Care,US,SPY,XLV
+EME,EME,Emcor,Industrials,Construction & Engineering,US,SPY,XLI
+EMR,EMR,Emerson Electric,Industrials,Electrical Components & Equipment,US,SPY,XLI
+EOG,EOG,EOG Resources,Energy,Oil & Gas Exploration & Production,US,SPY,XLE
+EPAM,EPAM,EPAM Systems,Information Technology,IT Consulting & Other Services,US,SPY,XLK
+EQIX,EQIX,Equinix,Real Estate,Data Center REITs,US,SPY,XLRE
+EQR,EQR,Equity Residential,Real Estate,Multi-Family Residential REITs,US,SPY,XLRE
+EQT,EQT,EQT Corporation,Energy,Oil & Gas Exploration & Production,US,SPY,XLE
+ERIE,ERIE,Erie Indemnity,Financials,Insurance Brokers,US,SPY,XLF
+ES,ES,Eversource Energy,Utilities,Electric Utilities,US,SPY,XLU
+ESS,ESS,Essex Property Trust,Real Estate,Multi-Family Residential REITs,US,SPY,XLRE
+ETN,ETN,Eaton Corporation,Industrials,Electrical Components & Equipment,US,SPY,XLI
+ETR,ETR,Entergy,Utilities,Electric Utilities,US,SPY,XLU
+EVRG,EVRG,Evergy,Utilities,Electric Utilities,US,SPY,XLU
+EW,EW,Edwards Lifesciences,Health Care,Health Care Equipment,US,SPY,XLV
+EXC,EXC,Exelon,Utilities,Electric Utilities,US,SPY,XLU
+EXE,EXE,Expand Energy,Energy,Oil & Gas Exploration & Production,US,SPY,XLE
+EXPD,EXPD,Expeditors International,Industrials,Air Freight & Logistics,US,SPY,XLI
+EXPE,EXPE,Expedia Group,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",US,SPY,XLY
+EXR,EXR,Extra Space Storage,Real Estate,Self-Storage REITs,US,SPY,XLRE
+F,F,Ford Motor Company,Consumer Discretionary,Automobile Manufacturers,US,SPY,XLY
+FANG,FANG,Diamondback Energy,Energy,Oil & Gas Exploration & Production,US,SPY,XLE
+FAST,FAST,Fastenal,Industrials,Trading Companies & Distributors,US,SPY,XLI
+FCX,FCX,Freeport-McMoRan,Materials,Copper,US,SPY,XLB
+FDS,FDS,FactSet,Financials,Financial Exchanges & Data,US,SPY,XLF
+FDX,FDX,FedEx,Industrials,Air Freight & Logistics,US,SPY,XLI
+FE,FE,FirstEnergy,Utilities,Electric Utilities,US,SPY,XLU
+FFIV,FFIV,"F5, Inc.",Information Technology,Communications Equipment,US,SPY,XLK
+FICO,FICO,Fair Isaac,Information Technology,Application Software,US,SPY,XLK
+FIS,FIS,Fidelity National Information Services,Financials,Transaction & Payment Processing Services,US,SPY,XLF
+FISV,FISV,Fiserv,Financials,Transaction & Payment Processing Services,US,SPY,XLF
+FITB,FITB,Fifth Third Bancorp,Financials,Regional Banks,US,SPY,XLF
+FIX,FIX,Comfort Systems USA,Industrials,Construction & Engineering,US,SPY,XLI
+FOX,FOX,Fox Corporation (Class B),Communication Services,Broadcasting,US,SPY,XLC
+FOXA,FOXA,Fox Corporation (Class A),Communication Services,Broadcasting,US,SPY,XLC
+FRT,FRT,Federal Realty Investment Trust,Real Estate,Retail REITs,US,SPY,XLRE
+FSLR,FSLR,First Solar,Information Technology,Semiconductors,US,SPY,XLK
+FTNT,FTNT,Fortinet,Information Technology,Systems Software,US,SPY,XLK
+FTV,FTV,Fortive,Industrials,Industrial Machinery & Supplies & Components,US,SPY,XLI
+GD,GD,General Dynamics,Industrials,Aerospace & Defense,US,SPY,XLI
+GDDY,GDDY,GoDaddy,Information Technology,Internet Services & Infrastructure,US,SPY,XLK
+GE,GE,GE Aerospace,Industrials,Aerospace & Defense,US,SPY,XLI
+GEHC,GEHC,GE HealthCare,Health Care,Health Care Equipment,US,SPY,XLV
+GEN,GEN,Gen Digital,Information Technology,Systems Software,US,SPY,XLK
+GEV,GEV,GE Vernova,Industrials,Heavy Electrical Equipment,US,SPY,XLI
+GILD,GILD,Gilead Sciences,Health Care,Biotechnology,US,SPY,XLV
+GIS,GIS,General Mills,Consumer Staples,Packaged Foods & Meats,US,SPY,XLP
+GL,GL,Globe Life,Financials,Life & Health Insurance,US,SPY,XLF
+GLW,GLW,Corning Inc.,Information Technology,Electronic Components,US,SPY,XLK
+GM,GM,General Motors,Consumer Discretionary,Automobile Manufacturers,US,SPY,XLY
+GNRC,GNRC,Generac,Industrials,Electrical Components & Equipment,US,SPY,XLI
+GOOG,GOOG,Alphabet Inc. (Class C),Communication Services,Interactive Media & Services,US,SPY,XLC
+GOOGL,GOOGL,Alphabet Inc. (Class A),Communication Services,Interactive Media & Services,US,SPY,XLC
+GPC,GPC,Genuine Parts Company,Consumer Discretionary,Distributors,US,SPY,XLY
+GPN,GPN,Global Payments,Financials,Transaction & Payment Processing Services,US,SPY,XLF
+GRMN,GRMN,Garmin,Consumer Discretionary,Consumer Electronics,US,SPY,XLY
+GS,GS,Goldman Sachs,Financials,Investment Banking & Brokerage,US,SPY,XLF
+GWW,GWW,W. W. Grainger,Industrials,Industrial Machinery & Supplies & Components,US,SPY,XLI
+HAL,HAL,Halliburton,Energy,Oil & Gas Equipment & Services,US,SPY,XLE
+HAS,HAS,Hasbro,Consumer Discretionary,Leisure Products,US,SPY,XLY
+HBAN,HBAN,Huntington Bancshares,Financials,Regional Banks,US,SPY,XLF
+HCA,HCA,HCA Healthcare,Health Care,Health Care Facilities,US,SPY,XLV
+HD,HD,Home Depot (The),Consumer Discretionary,Home Improvement Retail,US,SPY,XLY
+HIG,HIG,Hartford (The),Financials,Property & Casualty Insurance,US,SPY,XLF
+HII,HII,Huntington Ingalls Industries,Industrials,Aerospace & Defense,US,SPY,XLI
+HLT,HLT,Hilton Worldwide,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",US,SPY,XLY
+HOLX,HOLX,Hologic,Health Care,Health Care Equipment,US,SPY,XLV
+HON,HON,Honeywell,Industrials,Industrial Conglomerates,US,SPY,XLI
+HOOD,HOOD,Robinhood Markets,Financials,Investment Banking & Brokerage,US,SPY,XLF
+HPE,HPE,Hewlett Packard Enterprise,Information Technology,"Technology Hardware, Storage & Peripherals",US,SPY,XLK
+HPQ,HPQ,HP Inc.,Information Technology,"Technology Hardware, Storage & Peripherals",US,SPY,XLK
+HRL,HRL,Hormel Foods,Consumer Staples,Packaged Foods & Meats,US,SPY,XLP
+HSIC,HSIC,Henry Schein,Health Care,Health Care Distributors,US,SPY,XLV
+HST,HST,Host Hotels & Resorts,Real Estate,Hotel & Resort REITs,US,SPY,XLRE
+HSY,HSY,Hershey Company (The),Consumer Staples,Packaged Foods & Meats,US,SPY,XLP
+HUBB,HUBB,Hubbell Incorporated,Industrials,Industrial Machinery & Supplies & Components,US,SPY,XLI
+HUM,HUM,Humana,Health Care,Managed Health Care,US,SPY,XLV
+HWM,HWM,Howmet Aerospace,Industrials,Aerospace & Defense,US,SPY,XLI
+IBKR,IBKR,Interactive Brokers,Financials,Investment Banking & Brokerage,US,SPY,XLF
+IBM,IBM,IBM,Information Technology,IT Consulting & Other Services,US,SPY,XLK
+ICE,ICE,Intercontinental Exchange,Financials,Financial Exchanges & Data,US,SPY,XLF
+IDXX,IDXX,Idexx Laboratories,Health Care,Health Care Equipment,US,SPY,XLV
+IEX,IEX,IDEX Corporation,Industrials,Industrial Machinery & Supplies & Components,US,SPY,XLI
+IFF,IFF,International Flavors & Fragrances,Materials,Specialty Chemicals,US,SPY,XLB
+INCY,INCY,Incyte,Health Care,Biotechnology,US,SPY,XLV
+INTC,INTC,Intel,Information Technology,Semiconductors,US,SPY,XLK
+INTU,INTU,Intuit,Information Technology,Application Software,US,SPY,XLK
+INVH,INVH,Invitation Homes,Real Estate,Single-Family Residential REITs,US,SPY,XLRE
+IP,IP,International Paper,Materials,Paper & Plastic Packaging Products & Materials,US,SPY,XLB
+IQV,IQV,IQVIA,Health Care,Life Sciences Tools & Services,US,SPY,XLV
+IR,IR,Ingersoll Rand,Industrials,Industrial Machinery & Supplies & Components,US,SPY,XLI
+IRM,IRM,Iron Mountain,Real Estate,Other Specialized REITs,US,SPY,XLRE
+ISRG,ISRG,Intuitive Surgical,Health Care,Health Care Equipment,US,SPY,XLV
+IT,IT,Gartner,Information Technology,IT Consulting & Other Services,US,SPY,XLK
+ITW,ITW,Illinois Tool Works,Industrials,Industrial Machinery & Supplies & Components,US,SPY,XLI
+IVZ,IVZ,Invesco,Financials,Asset Management & Custody Banks,US,SPY,XLF
+J,J,Jacobs Solutions,Industrials,Construction & Engineering,US,SPY,XLI
+JBHT,JBHT,J.B. Hunt,Industrials,Cargo Ground Transportation,US,SPY,XLI
+JBL,JBL,Jabil,Information Technology,Electronic Manufacturing Services,US,SPY,XLK
+JCI,JCI,Johnson Controls,Industrials,Building Products,US,SPY,XLI
+JKHY,JKHY,Jack Henry & Associates,Financials,Transaction & Payment Processing Services,US,SPY,XLF
+JNJ,JNJ,Johnson & Johnson,Health Care,Pharmaceuticals,US,SPY,XLV
+JPM,JPM,JPMorgan Chase,Financials,Diversified Banks,US,SPY,XLF
+KDP,KDP,Keurig Dr Pepper,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,US,SPY,XLP
+KEY,KEY,KeyCorp,Financials,Regional Banks,US,SPY,XLF
+KEYS,KEYS,Keysight Technologies,Information Technology,Electronic Equipment & Instruments,US,SPY,XLK
+KHC,KHC,Kraft Heinz,Consumer Staples,Packaged Foods & Meats,US,SPY,XLP
+KIM,KIM,Kimco Realty,Real Estate,Retail REITs,US,SPY,XLRE
+KKR,KKR,KKR & Co.,Financials,Asset Management & Custody Banks,US,SPY,XLF
+KLAC,KLAC,KLA Corporation,Information Technology,Semiconductor Materials & Equipment,US,SPY,XLK
+KMB,KMB,Kimberly-Clark,Consumer Staples,Household Products,US,SPY,XLP
+KMI,KMI,Kinder Morgan,Energy,Oil & Gas Storage & Transportation,US,SPY,XLE
+KO,KO,Coca-Cola Company (The),Consumer Staples,Soft Drinks & Non-alcoholic Beverages,US,SPY,XLP
+KR,KR,Kroger,Consumer Staples,Food Retail,US,SPY,XLP
+KVUE,KVUE,Kenvue,Consumer Staples,Personal Care Products,US,SPY,XLP
+L,L,Loews Corporation,Financials,Multi-line Insurance,US,SPY,XLF
+LDOS,LDOS,Leidos,Industrials,Diversified Support Services,US,SPY,XLI
+LEN,LEN,Lennar,Consumer Discretionary,Homebuilding,US,SPY,XLY
+LH,LH,Labcorp,Health Care,Health Care Services,US,SPY,XLV
+LHX,LHX,L3Harris,Industrials,Aerospace & Defense,US,SPY,XLI
+LII,LII,Lennox International,Industrials,Building Products,US,SPY,XLI
+LIN,LIN,Linde plc,Materials,Industrial Gases,US,SPY,XLB
+LITE,LITE,Lumentum,Information Technology,Communications Equipment,US,SPY,XLK
+LLY,LLY,Lilly (Eli),Health Care,Pharmaceuticals,US,SPY,XLV
+LMT,LMT,Lockheed Martin,Industrials,Aerospace & Defense,US,SPY,XLI
+LNT,LNT,Alliant Energy,Utilities,Electric Utilities,US,SPY,XLU
+LOW,LOW,Lowe's,Consumer Discretionary,Home Improvement Retail,US,SPY,XLY
+LRCX,LRCX,Lam Research,Information Technology,Semiconductor Materials & Equipment,US,SPY,XLK
+LULU,LULU,Lululemon Athletica,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",US,SPY,XLY
+LUV,LUV,Southwest Airlines,Industrials,Passenger Airlines,US,SPY,XLI
+LVS,LVS,Las Vegas Sands,Consumer Discretionary,Casinos & Gaming,US,SPY,XLY
+LYB,LYB,LyondellBasell,Materials,Specialty Chemicals,US,SPY,XLB
+LYV,LYV,Live Nation Entertainment,Communication Services,Movies & Entertainment,US,SPY,XLC
+MA,MA,Mastercard,Financials,Transaction & Payment Processing Services,US,SPY,XLF
+MAA,MAA,Mid-America Apartment Communities,Real Estate,Multi-Family Residential REITs,US,SPY,XLRE
+MAR,MAR,Marriott International,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",US,SPY,XLY
+MAS,MAS,Masco,Industrials,Building Products,US,SPY,XLI
+MCD,MCD,McDonald's,Consumer Discretionary,Restaurants,US,SPY,XLY
+MCHP,MCHP,Microchip Technology,Information Technology,Semiconductors,US,SPY,XLK
+MCK,MCK,McKesson Corporation,Health Care,Health Care Distributors,US,SPY,XLV
+MCO,MCO,Moody's Corporation,Financials,Financial Exchanges & Data,US,SPY,XLF
+MDLZ,MDLZ,Mondelez International,Consumer Staples,Packaged Foods & Meats,US,SPY,XLP
+MDT,MDT,Medtronic,Health Care,Health Care Equipment,US,SPY,XLV
+MET,MET,MetLife,Financials,Life & Health Insurance,US,SPY,XLF
+META,META,Meta Platforms,Communication Services,Interactive Media & Services,US,SPY,XLC
+MGM,MGM,MGM Resorts,Consumer Discretionary,Casinos & Gaming,US,SPY,XLY
+MKC,MKC,McCormick & Company,Consumer Staples,Packaged Foods & Meats,US,SPY,XLP
+MLM,MLM,Martin Marietta Materials,Materials,Construction Materials,US,SPY,XLB
+MMM,MMM,3M,Industrials,Industrial Conglomerates,US,SPY,XLI
+MNST,MNST,Monster Beverage,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,US,SPY,XLP
+MO,MO,Altria,Consumer Staples,Tobacco,US,SPY,XLP
+MOS,MOS,Mosaic Company (The),Materials,Fertilizers & Agricultural Chemicals,US,SPY,XLB
+MPC,MPC,Marathon Petroleum,Energy,Oil & Gas Refining & Marketing,US,SPY,XLE
+MPWR,MPWR,Monolithic Power Systems,Information Technology,Semiconductors,US,SPY,XLK
+MRK,MRK,Merck & Co.,Health Care,Pharmaceuticals,US,SPY,XLV
+MRNA,MRNA,Moderna,Health Care,Biotechnology,US,SPY,XLV
+MRSH,MRSH,Marsh McLennan,Financials,Insurance Brokers,US,SPY,XLF
+MS,MS,Morgan Stanley,Financials,Investment Banking & Brokerage,US,SPY,XLF
+MSCI,MSCI,MSCI Inc.,Financials,Financial Exchanges & Data,US,SPY,XLF
+MSFT,MSFT,Microsoft,Information Technology,Systems Software,US,SPY,XLK
+MSI,MSI,Motorola Solutions,Information Technology,Communications Equipment,US,SPY,XLK
+MTB,MTB,M&T Bank,Financials,Regional Banks,US,SPY,XLF
+MTD,MTD,Mettler Toledo,Health Care,Life Sciences Tools & Services,US,SPY,XLV
+MU,MU,Micron Technology,Information Technology,Semiconductors,US,SPY,XLK
+NCLH,NCLH,Norwegian Cruise Line Holdings,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",US,SPY,XLY
+NDAQ,NDAQ,"Nasdaq, Inc.",Financials,Financial Exchanges & Data,US,SPY,XLF
+NDSN,NDSN,Nordson Corporation,Industrials,Industrial Machinery & Supplies & Components,US,SPY,XLI
+NEE,NEE,NextEra Energy,Utilities,Multi-Utilities,US,SPY,XLU
+NEM,NEM,Newmont,Materials,Gold,US,SPY,XLB
+NFLX,NFLX,Netflix,Communication Services,Movies & Entertainment,US,SPY,XLC
+NI,NI,NiSource,Utilities,Multi-Utilities,US,SPY,XLU
+NKE,NKE,"Nike, Inc.",Consumer Discretionary,"Apparel, Accessories & Luxury Goods",US,SPY,XLY
+NOC,NOC,Northrop Grumman,Industrials,Aerospace & Defense,US,SPY,XLI
+NOW,NOW,ServiceNow,Information Technology,Systems Software,US,SPY,XLK
+NRG,NRG,NRG Energy,Utilities,Independent Power Producers & Energy Traders,US,SPY,XLU
+NSC,NSC,Norfolk Southern,Industrials,Rail Transportation,US,SPY,XLI
+NTAP,NTAP,NetApp,Information Technology,"Technology Hardware, Storage & Peripherals",US,SPY,XLK
+NTRS,NTRS,Northern Trust,Financials,Asset Management & Custody Banks,US,SPY,XLF
+NUE,NUE,Nucor,Materials,Steel,US,SPY,XLB
+NVDA,NVDA,Nvidia,Information Technology,Semiconductors,US,SPY,XLK
+NVR,NVR,"NVR, Inc.",Consumer Discretionary,Homebuilding,US,SPY,XLY
+NWS,NWS,News Corp (Class B),Communication Services,Publishing,US,SPY,XLC
+NWSA,NWSA,News Corp (Class A),Communication Services,Publishing,US,SPY,XLC
+NXPI,NXPI,NXP Semiconductors,Information Technology,Semiconductors,US,SPY,XLK
+O,O,Realty Income,Real Estate,Retail REITs,US,SPY,XLRE
+ODFL,ODFL,Old Dominion,Industrials,Cargo Ground Transportation,US,SPY,XLI
+OKE,OKE,Oneok,Energy,Oil & Gas Storage & Transportation,US,SPY,XLE
+OMC,OMC,Omnicom Group,Communication Services,Advertising,US,SPY,XLC
+ON,ON,ON Semiconductor,Information Technology,Semiconductors,US,SPY,XLK
+ORCL,ORCL,Oracle Corporation,Information Technology,Application Software,US,SPY,XLK
+ORLY,ORLY,O’Reilly Automotive,Consumer Discretionary,Automotive Retail,US,SPY,XLY
+OTIS,OTIS,Otis Worldwide,Industrials,Industrial Machinery & Supplies & Components,US,SPY,XLI
+OXY,OXY,Occidental Petroleum,Energy,Oil & Gas Exploration & Production,US,SPY,XLE
+PANW,PANW,Palo Alto Networks,Information Technology,Systems Software,US,SPY,XLK
+PAYX,PAYX,Paychex,Industrials,Human Resource & Employment Services,US,SPY,XLI
+PCAR,PCAR,Paccar,Industrials,Construction Machinery & Heavy Transportation Equipment,US,SPY,XLI
+PCG,PCG,PG&E Corporation,Utilities,Multi-Utilities,US,SPY,XLU
+PEG,PEG,Public Service Enterprise Group,Utilities,Electric Utilities,US,SPY,XLU
+PEP,PEP,PepsiCo,Consumer Staples,Soft Drinks & Non-alcoholic Beverages,US,SPY,XLP
+PFE,PFE,Pfizer,Health Care,Pharmaceuticals,US,SPY,XLV
+PFG,PFG,Principal Financial Group,Financials,Life & Health Insurance,US,SPY,XLF
+PG,PG,Procter & Gamble,Consumer Staples,Personal Care Products,US,SPY,XLP
+PGR,PGR,Progressive Corporation,Financials,Property & Casualty Insurance,US,SPY,XLF
+PH,PH,Parker Hannifin,Industrials,Industrial Machinery & Supplies & Components,US,SPY,XLI
+PHM,PHM,PulteGroup,Consumer Discretionary,Homebuilding,US,SPY,XLY
+PKG,PKG,Packaging Corporation of America,Materials,Paper & Plastic Packaging Products & Materials,US,SPY,XLB
+PLD,PLD,Prologis,Real Estate,Industrial REITs,US,SPY,XLRE
+PLTR,PLTR,Palantir Technologies,Information Technology,Application Software,US,SPY,XLK
+PM,PM,Philip Morris International,Consumer Staples,Tobacco,US,SPY,XLP
+PNC,PNC,PNC Financial Services,Financials,Diversified Banks,US,SPY,XLF
+PNR,PNR,Pentair,Industrials,Industrial Machinery & Supplies & Components,US,SPY,XLI
+PNW,PNW,Pinnacle West Capital,Utilities,Multi-Utilities,US,SPY,XLU
+PODD,PODD,Insulet Corporation,Health Care,Health Care Equipment,US,SPY,XLV
+POOL,POOL,Pool Corporation,Consumer Discretionary,Distributors,US,SPY,XLY
+PPG,PPG,PPG Industries,Materials,Specialty Chemicals,US,SPY,XLB
+PPL,PPL,PPL Corporation,Utilities,Electric Utilities,US,SPY,XLU
+PRU,PRU,Prudential Financial,Financials,Life & Health Insurance,US,SPY,XLF
+PSA,PSA,Public Storage,Real Estate,Self-Storage REITs,US,SPY,XLRE
+PSKY,PSKY,Paramount Skydance Corporation,Communication Services,Movies & Entertainment,US,SPY,XLC
+PSX,PSX,Phillips 66,Energy,Oil & Gas Refining & Marketing,US,SPY,XLE
+PTC,PTC,PTC Inc.,Information Technology,Application Software,US,SPY,XLK
+PWR,PWR,Quanta Services,Industrials,Construction & Engineering,US,SPY,XLI
+PYPL,PYPL,PayPal,Financials,Transaction & Payment Processing Services,US,SPY,XLF
+Q,Q,Qnity Electronics,Information Technology,Semiconductor Materials & Equipment,US,SPY,XLK
+QCOM,QCOM,Qualcomm,Information Technology,Semiconductors,US,SPY,XLK
+RCL,RCL,Royal Caribbean Group,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",US,SPY,XLY
+REG,REG,Regency Centers,Real Estate,Retail REITs,US,SPY,XLRE
+REGN,REGN,Regeneron Pharmaceuticals,Health Care,Biotechnology,US,SPY,XLV
+RF,RF,Regions Financial Corporation,Financials,Regional Banks,US,SPY,XLF
+RJF,RJF,Raymond James Financial,Financials,Investment Banking & Brokerage,US,SPY,XLF
+RL,RL,Ralph Lauren Corporation,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",US,SPY,XLY
+RMD,RMD,ResMed,Health Care,Health Care Equipment,US,SPY,XLV
+ROK,ROK,Rockwell Automation,Industrials,Electrical Components & Equipment,US,SPY,XLI
+ROL,ROL,"Rollins, Inc.",Industrials,Environmental & Facilities Services,US,SPY,XLI
+ROP,ROP,Roper Technologies,Information Technology,Electronic Equipment & Instruments,US,SPY,XLK
+ROST,ROST,Ross Stores,Consumer Discretionary,Apparel Retail,US,SPY,XLY
+RSG,RSG,Republic Services,Industrials,Environmental & Facilities Services,US,SPY,XLI
+RTX,RTX,RTX Corporation,Industrials,Aerospace & Defense,US,SPY,XLI
+RVTY,RVTY,Revvity,Health Care,Health Care Equipment,US,SPY,XLV
+SATS,SATS,EchoStar,Communication Services,Wireless Telecommunication Services,US,SPY,XLC
+SBAC,SBAC,SBA Communications,Real Estate,Telecom Tower REITs,US,SPY,XLRE
+SBUX,SBUX,Starbucks,Consumer Discretionary,Restaurants,US,SPY,XLY
+SCHW,SCHW,Charles Schwab Corporation,Financials,Investment Banking & Brokerage,US,SPY,XLF
+SHW,SHW,Sherwin-Williams,Materials,Specialty Chemicals,US,SPY,XLB
+SJM,SJM,J.M. Smucker Company (The),Consumer Staples,Packaged Foods & Meats,US,SPY,XLP
+SLB,SLB,Schlumberger,Energy,Oil & Gas Equipment & Services,US,SPY,XLE
+SMCI,SMCI,Supermicro,Information Technology,"Technology Hardware, Storage & Peripherals",US,SPY,XLK
+SNA,SNA,Snap-on,Industrials,Industrial Machinery & Supplies & Components,US,SPY,XLI
+SNDK,SNDK,Sandisk,Information Technology,"Technology Hardware, Storage & Peripherals",US,SPY,XLK
+SNPS,SNPS,Synopsys,Information Technology,Application Software,US,SPY,XLK
+SO,SO,Southern Company,Utilities,Electric Utilities,US,SPY,XLU
+SOLV,SOLV,Solventum,Health Care,Health Care Technology,US,SPY,XLV
+SPG,SPG,Simon Property Group,Real Estate,Retail REITs,US,SPY,XLRE
+SPGI,SPGI,S&P Global,Financials,Financial Exchanges & Data,US,SPY,XLF
+SRE,SRE,Sempra,Utilities,Multi-Utilities,US,SPY,XLU
+STE,STE,Steris,Health Care,Health Care Equipment,US,SPY,XLV
+STLD,STLD,Steel Dynamics,Materials,Steel,US,SPY,XLB
+STT,STT,State Street Corporation,Financials,Asset Management & Custody Banks,US,SPY,XLF
+STX,STX,Seagate Technology,Information Technology,"Technology Hardware, Storage & Peripherals",US,SPY,XLK
+STZ,STZ,Constellation Brands,Consumer Staples,Distillers & Vintners,US,SPY,XLP
+SW,SW,Smurfit Westrock,Materials,Paper & Plastic Packaging Products & Materials,US,SPY,XLB
+SWK,SWK,Stanley Black & Decker,Industrials,Industrial Machinery & Supplies & Components,US,SPY,XLI
+SWKS,SWKS,Skyworks Solutions,Information Technology,Semiconductors,US,SPY,XLK
+SYF,SYF,Synchrony Financial,Financials,Consumer Finance,US,SPY,XLF
+SYK,SYK,Stryker Corporation,Health Care,Health Care Equipment,US,SPY,XLV
+SYY,SYY,Sysco,Consumer Staples,Food Distributors,US,SPY,XLP
+T,T,AT&T,Communication Services,Integrated Telecommunication Services,US,SPY,XLC
+TAP,TAP,Molson Coors Beverage Company,Consumer Staples,Brewers,US,SPY,XLP
+TDG,TDG,TransDigm Group,Industrials,Aerospace & Defense,US,SPY,XLI
+TDY,TDY,Teledyne Technologies,Information Technology,Electronic Equipment & Instruments,US,SPY,XLK
+TECH,TECH,Bio-Techne,Health Care,Life Sciences Tools & Services,US,SPY,XLV
+TEL,TEL,TE Connectivity,Information Technology,Electronic Manufacturing Services,US,SPY,XLK
+TER,TER,Teradyne,Information Technology,Semiconductor Materials & Equipment,US,SPY,XLK
+TFC,TFC,Truist Financial,Financials,Diversified Banks,US,SPY,XLF
+TGT,TGT,Target Corporation,Consumer Staples,Consumer Staples Merchandise Retail,US,SPY,XLP
+TJX,TJX,TJX Companies,Consumer Discretionary,Apparel Retail,US,SPY,XLY
+TKO,TKO,TKO Group Holdings,Communication Services,Movies & Entertainment,US,SPY,XLC
+TMO,TMO,Thermo Fisher Scientific,Health Care,Life Sciences Tools & Services,US,SPY,XLV
+TMUS,TMUS,T-Mobile US,Communication Services,Wireless Telecommunication Services,US,SPY,XLC
+TPL,TPL,Texas Pacific Land Corporation,Energy,Oil & Gas Exploration & Production,US,SPY,XLE
+TPR,TPR,"Tapestry, Inc.",Consumer Discretionary,"Apparel, Accessories & Luxury Goods",US,SPY,XLY
+TRGP,TRGP,Targa Resources,Energy,Oil & Gas Storage & Transportation,US,SPY,XLE
+TRMB,TRMB,Trimble Inc.,Information Technology,Electronic Equipment & Instruments,US,SPY,XLK
+TROW,TROW,T. Rowe Price,Financials,Asset Management & Custody Banks,US,SPY,XLF
+TRV,TRV,Travelers Companies (The),Financials,Property & Casualty Insurance,US,SPY,XLF
+TSCO,TSCO,Tractor Supply,Consumer Discretionary,Other Specialty Retail,US,SPY,XLY
+TSLA,TSLA,"Tesla, Inc.",Consumer Discretionary,Automobile Manufacturers,US,SPY,XLY
+TSN,TSN,Tyson Foods,Consumer Staples,Packaged Foods & Meats,US,SPY,XLP
+TT,TT,Trane Technologies,Industrials,Building Products,US,SPY,XLI
+TTD,TTD,Trade Desk (The),Communication Services,Advertising,US,SPY,XLC
+TTWO,TTWO,Take-Two Interactive,Communication Services,Interactive Home Entertainment,US,SPY,XLC
+TXN,TXN,Texas Instruments,Information Technology,Semiconductors,US,SPY,XLK
+TXT,TXT,Textron,Industrials,Aerospace & Defense,US,SPY,XLI
+TYL,TYL,Tyler Technologies,Information Technology,Application Software,US,SPY,XLK
+UAL,UAL,United Airlines Holdings,Industrials,Passenger Airlines,US,SPY,XLI
+UBER,UBER,Uber,Industrials,Passenger Ground Transportation,US,SPY,XLI
+UDR,UDR,"UDR, Inc.",Real Estate,Multi-Family Residential REITs,US,SPY,XLRE
+UHS,UHS,Universal Health Services,Health Care,Health Care Facilities,US,SPY,XLV
+ULTA,ULTA,Ulta Beauty,Consumer Discretionary,Other Specialty Retail,US,SPY,XLY
+UNH,UNH,UnitedHealth Group,Health Care,Managed Health Care,US,SPY,XLV
+UNP,UNP,Union Pacific Corporation,Industrials,Rail Transportation,US,SPY,XLI
+UPS,UPS,United Parcel Service,Industrials,Air Freight & Logistics,US,SPY,XLI
+URI,URI,United Rentals,Industrials,Trading Companies & Distributors,US,SPY,XLI
+USB,USB,U.S. Bancorp,Financials,Diversified Banks,US,SPY,XLF
+V,V,Visa Inc.,Financials,Transaction & Payment Processing Services,US,SPY,XLF
+VICI,VICI,Vici Properties,Real Estate,Hotel & Resort REITs,US,SPY,XLRE
+VLO,VLO,Valero Energy,Energy,Oil & Gas Refining & Marketing,US,SPY,XLE
+VLTO,VLTO,Veralto,Industrials,Environmental & Facilities Services,US,SPY,XLI
+VMC,VMC,Vulcan Materials Company,Materials,Construction Materials,US,SPY,XLB
+VRSK,VRSK,Verisk Analytics,Industrials,Research & Consulting Services,US,SPY,XLI
+VRSN,VRSN,Verisign,Information Technology,Internet Services & Infrastructure,US,SPY,XLK
+VRT,VRT,Vertiv,Industrials,Electrical Components & Equipment,US,SPY,XLI
+VRTX,VRTX,Vertex Pharmaceuticals,Health Care,Biotechnology,US,SPY,XLV
+VST,VST,Vistra Corp.,Utilities,Electric Utilities,US,SPY,XLU
+VTR,VTR,Ventas,Real Estate,Health Care REITs,US,SPY,XLRE
+VTRS,VTRS,Viatris,Health Care,Pharmaceuticals,US,SPY,XLV
+VZ,VZ,Verizon,Communication Services,Integrated Telecommunication Services,US,SPY,XLC
+WAB,WAB,Wabtec,Industrials,Construction Machinery & Heavy Transportation Equipment,US,SPY,XLI
+WAT,WAT,Waters Corporation,Health Care,Life Sciences Tools & Services,US,SPY,XLV
+WBD,WBD,Warner Bros. Discovery,Communication Services,Broadcasting,US,SPY,XLC
+WDAY,WDAY,"Workday, Inc.",Information Technology,Application Software,US,SPY,XLK
+WDC,WDC,Western Digital,Information Technology,"Technology Hardware, Storage & Peripherals",US,SPY,XLK
+WEC,WEC,WEC Energy Group,Utilities,Electric Utilities,US,SPY,XLU
+WELL,WELL,Welltower,Real Estate,Health Care REITs,US,SPY,XLRE
+WFC,WFC,Wells Fargo,Financials,Diversified Banks,US,SPY,XLF
+WM,WM,Waste Management,Industrials,Environmental & Facilities Services,US,SPY,XLI
+WMB,WMB,Williams Companies,Energy,Oil & Gas Storage & Transportation,US,SPY,XLE
+WMT,WMT,Walmart,Consumer Staples,Consumer Staples Merchandise Retail,US,SPY,XLP
+WRB,WRB,W. R. Berkley Corporation,Financials,Property & Casualty Insurance,US,SPY,XLF
+WSM,WSM,"Williams-Sonoma, Inc.",Consumer Discretionary,Homefurnishing Retail,US,SPY,XLY
+WST,WST,West Pharmaceutical Services,Health Care,Health Care Supplies,US,SPY,XLV
+WTW,WTW,Willis Towers Watson,Financials,Insurance Brokers,US,SPY,XLF
+WY,WY,Weyerhaeuser,Real Estate,Timber REITs,US,SPY,XLRE
+WYNN,WYNN,Wynn Resorts,Consumer Discretionary,Casinos & Gaming,US,SPY,XLY
+XEL,XEL,Xcel Energy,Utilities,Multi-Utilities,US,SPY,XLU
+XOM,XOM,ExxonMobil,Energy,Integrated Oil & Gas,US,SPY,XLE
+XYL,XYL,Xylem Inc.,Industrials,Industrial Machinery & Supplies & Components,US,SPY,XLI
+XYZ,XYZ,"Block, Inc.",Financials,Transaction & Payment Processing Services,US,SPY,XLF
+YUM,YUM,Yum! Brands,Consumer Discretionary,Restaurants,US,SPY,XLY
+ZBH,ZBH,Zimmer Biomet,Health Care,Health Care Equipment,US,SPY,XLV
+ZBRA,ZBRA,Zebra Technologies,Information Technology,Electronic Equipment & Instruments,US,SPY,XLK
+ZTS,ZTS,Zoetis,Health Care,Pharmaceuticals,US,SPY,XLV

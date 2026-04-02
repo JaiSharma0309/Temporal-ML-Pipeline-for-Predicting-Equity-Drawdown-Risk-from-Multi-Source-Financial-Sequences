@@ -1,0 +1,26 @@
+# macOS / editor / Python cache
+.DS_Store
+__pycache__/
+*.pyc
+.claude/
+
+# Large generated raw data (reproducible)
+data/raw/
+
+# Large processed training tables (reproducible)
+data/processed/stage1_modeling_data.csv
+data/processed/stage1_modeling_data_full.csv
+data/processed/stage1_modeling_data_shortened.csv
+
+# Optional local convenience exports
+# (keep only if you intentionally want to track these)
+# data/processed/stage1_modeling_data_shortened.csv
+# data/processed/stage1_modeling_data_reduced.xlsx
+
+# Large model prediction dumps
+results/stage1/*_predictions.csv
+
+# If you keep plots/results tracked, comment these out.
+# Otherwise ignore bulky generated result artifacts by default.
+# results/stage1/*.csv
+# results/stage1/plots/
