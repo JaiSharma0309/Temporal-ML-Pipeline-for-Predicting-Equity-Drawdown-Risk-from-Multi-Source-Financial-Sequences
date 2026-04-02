@@ -4,6 +4,15 @@ Time-aware machine learning pipeline for predicting whether an equity will exper
 
 The project builds a multi-source dataset (price action, benchmark-relative features, short interest, fundamentals), trains multiple models with temporal safeguards, and evaluates both statistical quality (ROC/PR) and practical ranking value (top-decile lift).
 
+## 10-Second Snapshot
+
+- Test top-decile lift (random forest): **2.31x**
+- The highest-risk decile is materially enriched for future 20%+ drawdowns.
+
+![Test Decile Event Rate](results/stage1/plots/04_test_decile_event_rate.png)
+
+![Capture vs Workload](results/stage1/plots/05_test_capture_vs_workload.png)
+
 ## Purpose
 
 This repo answers a practical risk-screening question:
