@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 
 RAW_DIR = Path("data/raw/prices_yfinance")
+META_PATH = Path("data/metadata/equity_universe_metadata.csv")
 OUT_DIR = Path("data/processed")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -10,57 +11,8 @@ US_BENCHMARK = "SPY"
 CA_BENCHMARK = "XIU.TO"
 MARKET_BENCHMARKS = {US_BENCHMARK, CA_BENCHMARK}
 
-SECTOR_BENCHMARKS = {
-    "XLK",
-    "XIT.TO",
-    "XFN.TO",
-}
-
 FUTURE_HORIZON = 60
 DRAWDOWN_THRESHOLD = 0.20
-
-# Current prototype mapping.
-# When you scale to the full S&P 500 + TSX 60 later, we should replace this
-# with a proper metadata table instead of hardcoding.
-EQUITY_METADATA = {
-    "AAPL": {
-        "country": "US",
-        "sector": "Technology",
-        "market_benchmark": "SPY",
-        "sector_benchmark": "XLK",
-    },
-    "MSFT": {
-        "country": "US",
-        "sector": "Technology",
-        "market_benchmark": "SPY",
-        "sector_benchmark": "XLK",
-    },
-    "NVDA": {
-        "country": "US",
-        "sector": "Technology",
-        "market_benchmark": "SPY",
-        "sector_benchmark": "XLK",
-    },
-    "SHOP.TO": {
-        "country": "CA",
-        "sector": "Technology",
-        "market_benchmark": "XIU.TO",
-        "sector_benchmark": "XIT.TO",
-    },
-    "RY.TO": {
-        "country": "CA",
-        "sector": "Financials",
-        "market_benchmark": "XIU.TO",
-        "sector_benchmark": "XFN.TO",
-    },
-    "TD.TO": {
-        "country": "CA",
-        "sector": "Financials",
-        "market_benchmark": "XIU.TO",
-        "sector_benchmark": "XFN.TO",
-    },
-}
-
 
 def load_price_file(path: Path) -> pd.DataFrame:
     df = pd.read_csv(path)
@@ -74,26 +26,38 @@ def load_price_file(path: Path) -> pd.DataFrame:
     df = df.sort_values("date").reset_index(drop=True)
     return df
 
+def load_metadata() -> pd.DataFrame:
+    meta = pd.read_csv(META_PATH)
+
+    required = {
+        "symbol",
+        "country",
+        "sector",
+        "market_benchmark",
+        "sector_benchmark",
+    }
+    missing = required - set(meta.columns)
+    if missing:
+        raise ValueError(f"Metadata file missing columns: {missing}")
+
+    meta = meta.drop_duplicates(subset=["symbol"]).reset_index(drop=True)
+    return meta
 
 def trailing_max_drawdown(series: pd.Series, window: int) -> pd.Series:
     roll_max = series.rolling(window).max()
     drawdown = series / roll_max - 1.0
     return drawdown.rolling(window).min()
 
-
 def downside_volatility(returns: pd.Series, window: int) -> pd.Series:
     neg = returns.clip(upper=0)
     return neg.rolling(window).std()
-
 
 def upside_volatility(returns: pd.Series, window: int) -> pd.Series:
     pos = returns.clip(lower=0)
     return pos.rolling(window).std()
 
-
 def days_since_last_high(series: pd.Series, window: int) -> pd.Series:
     return series.rolling(window).apply(lambda x: len(x) - 1 - np.argmax(x), raw=True)
-
 
 def rolling_slope(log_price: pd.Series, window: int) -> pd.Series:
     x = np.arange(window, dtype=float)
@@ -106,7 +70,6 @@ def rolling_slope(log_price: pd.Series, window: int) -> pd.Series:
         return np.dot(x_centered, arr - arr.mean()) / denom
 
     return log_price.rolling(window).apply(_slope, raw=True)
-
 
 def compute_future_label(df: pd.DataFrame) -> pd.DataFrame:
     px = df["adjusted_close"]
@@ -125,7 +88,6 @@ def compute_future_label(df: pd.DataFrame) -> pd.DataFrame:
         df.loc[last_valid_idx:, ["future_min_price_60d", "future_drawdown_60d", "label_drawdown_20pct_60d"]] = np.nan
 
     return df
-
 
 def compute_base_features(df: pd.DataFrame) -> pd.DataFrame:
     px = df["adjusted_close"]
@@ -184,7 +146,6 @@ def compute_base_features(df: pd.DataFrame) -> pd.DataFrame:
     df["avg_intraday_range_20d"] = df["intraday_range"].rolling(20).mean()
 
     return df
-
 
 def add_benchmark_features(df: pd.DataFrame, benchmark_df: pd.DataFrame, prefix: str, benchmark_symbol: str) -> pd.DataFrame:
     bench_cols = [
@@ -246,26 +207,13 @@ def add_benchmark_features(df: pd.DataFrame, benchmark_df: pd.DataFrame, prefix:
     df[f"{prefix}_benchmark_symbol"] = benchmark_symbol
     return df
 
-
-def get_metadata(symbol: str) -> dict:
-    if symbol in EQUITY_METADATA:
-        return EQUITY_METADATA[symbol]
-
-    country = "CA" if symbol.endswith(".TO") else "US"
-    market_benchmark = CA_BENCHMARK if country == "CA" else US_BENCHMARK
-
-    return {
-        "country": country,
-        "sector": "Unknown",
-        "market_benchmark": market_benchmark,
-        "sector_benchmark": market_benchmark,
-    }
-
-
 def main():
     files = sorted([p for p in RAW_DIR.glob("*.csv") if not p.name.startswith("_")])
     if not files:
         raise ValueError(f"No CSV files found in {RAW_DIR}")
+
+    metadata = load_metadata()
+    metadata_map = metadata.set_index("symbol").to_dict(orient="index")
 
     all_data = {}
     for path in files:
@@ -281,20 +229,25 @@ def main():
 
     rows = []
     for symbol, df in all_data.items():
-        if symbol in MARKET_BENCHMARKS or symbol in SECTOR_BENCHMARKS:
+        if symbol in MARKET_BENCHMARKS:
             continue
 
-        meta = get_metadata(symbol)
+        if symbol not in metadata_map:
+            continue
 
-        df = df.copy()
-        df["country"] = meta["country"]
-        df["sector"] = meta["sector"]
+        meta = metadata_map[symbol]
 
         market_symbol = meta["market_benchmark"]
         sector_symbol = meta["sector_benchmark"]
 
+        if market_symbol not in all_data:
+            continue
         if sector_symbol not in all_data:
             sector_symbol = market_symbol
+
+        df = df.copy()
+        df["country"] = meta["country"]
+        df["sector"] = meta["sector"]
 
         df = add_benchmark_features(df, all_data[market_symbol], prefix="mkt", benchmark_symbol=market_symbol)
         df = add_benchmark_features(df, all_data[sector_symbol], prefix="sector", benchmark_symbol=sector_symbol)
@@ -426,8 +379,7 @@ def main():
     print(f"Rows in clean modeling dataset: {len(clean_df)}")
     print(f"Positive rate: {clean_df['label_drawdown_20pct_60d'].mean():.4f}")
     print("Rows by symbol:")
-    print(clean_df["symbol"].value_counts().sort_index())
-
+    print(clean_df['symbol'].value_counts().sort_index())
 
 if __name__ == "__main__":
     main()
