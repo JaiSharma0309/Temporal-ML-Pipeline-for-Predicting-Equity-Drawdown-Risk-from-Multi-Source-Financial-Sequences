@@ -70,7 +70,9 @@ DATA_PATH          = REPO_ROOT / "data/processed/stage1_modeling_data.csv"
 SI_PATH            = REPO_ROOT / "data/raw/short_interest/finra_short_interest_raw.parquet"
 FUNDAMENTALS_PATH  = REPO_ROOT / "data/raw/fundamentals/fundamentals_features.parquet"
 OUT_DIR            = REPO_ROOT / "results/stage1"
+TABLES_DIR         = OUT_DIR / "tables"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
+TABLES_DIR.mkdir(parents=True, exist_ok=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -956,7 +958,7 @@ def save_predictions(df_split, model_name, split_name, y_true, y_pred, y_score):
     out["y_true"]  = np.asarray(y_true)
     out["y_pred"]  = np.asarray(y_pred) if y_pred is not None else np.nan
     out["y_score"] = np.asarray(y_score)
-    out.to_csv(OUT_DIR / f"{model_name}_{split_name}_predictions.csv", index=False)
+    out.to_csv(TABLES_DIR / f"{model_name}_{split_name}_predictions.csv", index=False)
 
 
 def save_logistic_coefficients(pipeline):
@@ -968,7 +970,7 @@ def save_logistic_coefficients(pipeline):
         "coefficient":     coefs,
         "abs_coefficient": np.abs(coefs),
     }).sort_values("abs_coefficient", ascending=False).to_csv(
-        OUT_DIR / "logistic_regression_coefficients.csv", index=False
+        TABLES_DIR / "logistic_regression_coefficients.csv", index=False
     )
 
 
@@ -979,7 +981,7 @@ def save_rf_importances(pipeline, filename: str = "random_forest_feature_importa
     pd.DataFrame({
         "feature":    feature_names,
         "importance": importances,
-    }).sort_values("importance", ascending=False).to_csv(OUT_DIR / filename, index=False)
+    }).sort_values("importance", ascending=False).to_csv(TABLES_DIR / filename, index=False)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1112,8 +1114,8 @@ def run_walk_forward_cv(df: pd.DataFrame, numeric_features: list) -> pd.DataFram
                 f"lift@10%={row['top10_lift']:.2f}x"
             )
 
-    cv_df.to_csv(OUT_DIR / "walk_forward_cv_results.csv", index=False)
-    print(f"  Saved walk-forward CV results → {OUT_DIR / 'walk_forward_cv_results.csv'}")
+    cv_df.to_csv(TABLES_DIR / "walk_forward_cv_results.csv", index=False)
+    print(f"  Saved walk-forward CV results → {TABLES_DIR / 'walk_forward_cv_results.csv'}")
 
     return cv_df
 
@@ -1245,7 +1247,7 @@ def run_final_split(df: pd.DataFrame, numeric_features: list, has_reg: bool) -> 
 
     # ── model selection ────────────────────────────────────────────────────────
     metrics_df = pd.DataFrame(all_metrics)
-    metrics_df.to_csv(OUT_DIR / "stage1_metrics.csv", index=False)
+    metrics_df.to_csv(TABLES_DIR / "stage1_metrics.csv", index=False)
 
     # Best classifier by val PR AUC (more informative than ROC for imbalanced data)
     val_clf       = metrics_df[(metrics_df["split"] == "validation") &
@@ -1308,8 +1310,8 @@ def run_final_split(df: pd.DataFrame, numeric_features: list, has_reg: bool) -> 
 
         val_thr  = threshold_sweep(y_val,  val_score,  best_clf_name, "validation")
         test_thr = threshold_sweep(y_test, test_score, best_clf_name, "test")
-        val_thr.to_csv(OUT_DIR  / f"{best_clf_name}_validation_threshold_sweep.csv", index=False)
-        test_thr.to_csv(OUT_DIR / f"{best_clf_name}_test_threshold_sweep.csv",       index=False)
+        val_thr.to_csv(TABLES_DIR / f"{best_clf_name}_validation_threshold_sweep.csv", index=False)
+        test_thr.to_csv(TABLES_DIR / f"{best_clf_name}_test_threshold_sweep.csv",       index=False)
 
         best_thr = float(val_thr.sort_values("f1", ascending=False).iloc[0]["threshold"])
         with open(OUT_DIR / f"{best_clf_name}_selected_threshold.txt", "w") as f:
@@ -1319,13 +1321,13 @@ def run_final_split(df: pd.DataFrame, numeric_features: list, has_reg: bool) -> 
             "model": best_clf_name, "split": "test_selected_threshold",
             "threshold": best_thr,
             **evaluate_at_threshold(y_test, test_score, best_thr),
-        }]).to_csv(OUT_DIR / f"{best_clf_name}_test_selected_threshold_metrics.csv", index=False)
+        }]).to_csv(TABLES_DIR / f"{best_clf_name}_test_selected_threshold_metrics.csv", index=False)
 
         val_lift  = top_k_event_rate(y_val,  val_score,  k_frac=0.10)
         test_lift = top_k_event_rate(y_test, test_score, k_frac=0.10)
         pd.DataFrame([{"split": "validation", **val_lift},
                       {"split": "test",       **test_lift}]
-                     ).to_csv(OUT_DIR / f"{best_clf_name}_top10pct_lift.csv", index=False)
+                     ).to_csv(TABLES_DIR / f"{best_clf_name}_top10pct_lift.csv", index=False)
 
         print(f"\n  {best_clf_name} lift@10%:  "
               f"val={val_lift['lift']:.2f}x  test={test_lift['lift']:.2f}x")
@@ -1340,7 +1342,7 @@ def run_final_split(df: pd.DataFrame, numeric_features: list, has_reg: bool) -> 
         test_lift_reg = top_k_event_rate(y_test, test_risk, k_frac=0.10)
         pd.DataFrame([{"split": "validation", **val_lift_reg},
                       {"split": "test",       **test_lift_reg}]
-                     ).to_csv(OUT_DIR / f"{best_reg_name}_top10pct_lift.csv", index=False)
+                     ).to_csv(TABLES_DIR / f"{best_reg_name}_top10pct_lift.csv", index=False)
 
         print(f"  {best_reg_name} lift@10%:  "
               f"val={val_lift_reg['lift']:.2f}x  test={test_lift_reg['lift']:.2f}x")

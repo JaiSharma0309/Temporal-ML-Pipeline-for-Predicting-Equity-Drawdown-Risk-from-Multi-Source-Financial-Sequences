@@ -85,6 +85,12 @@ Output:
 - `data/processed/stage1_summary.csv`
 
 Note: output filenames still use `stage1_*` naming for compatibility.
+Note: `data/processed/stage1_modeling_data.csv` is not committed to this repo
+because it is large and reproducible. Generate it locally by running:
+
+```bash
+python src/build_modeling_dataset.py
+```
 
 ### 3) Optional short-interest features
 
@@ -129,9 +135,9 @@ Output:
 
 Outputs:
 
-- `results/stage1/stage1_metrics.csv`
-- predictions per model/split in `results/stage1/*_predictions.csv`
-- CV summary: `results/stage1/walk_forward_cv_results.csv`
+- `results/stage1/tables/stage1_metrics.csv`
+- predictions per model/split in `results/stage1/tables/*_predictions.csv`
+- CV summary: `results/stage1/tables/walk_forward_cv_results.csv`
 - feature importances / coefficients / threshold sweeps / lift files
 
 ## Your Current Results (From Latest Run)
@@ -180,6 +186,33 @@ Generates:
 - `results/stage1/plots/01_top_decile_lift_by_fold.png`
 - `results/stage1/plots/02_fold_by_fold_roc_pr.png`
 - `results/stage1/plots/03_test_cumulative_lift_curve.png`
+- `results/stage1/plots/04_test_decile_event_rate.png`
+- `results/stage1/plots/05_test_capture_vs_workload.png`
+- `results/stage1/reports/business_impact_summary.md` (short operational write-up)
+
+## Fresh Clone Quickstart
+
+From a fresh clone, run:
+
+```bash
+python -m pip install -r requirements.txt
+make pipeline
+```
+
+This will:
+
+1. download the universe and price history,
+2. generate `data/processed/stage1_modeling_data.csv`,
+3. fetch short-interest and fundamentals,
+4. train/evaluate models,
+5. generate plots and business-impact summary.
+
+If you only want training/plots after data already exists:
+
+```bash
+make train
+make visuals
+```
 
 ## How to Run the Full Pipeline
 
@@ -233,6 +266,7 @@ pip install pandas numpy scikit-learn matplotlib seaborn requests yfinance pyarr
 - Universe is scraped from current index constituents, so historical survivorship bias can remain.
 - Short interest source is US-centric (FINRA), so Canadian short-interest coverage is expected to be limited unless CIRO/IIROC data is integrated.
 - Fundamentals coverage is currently sparse; models still perform well but this feature block may have limited contribution unless coverage is improved.
+- `results/stage1/tables/` is kept aligned with artifacts produced by the current training pipeline (stale legacy tuning exports were removed).
 
 ## Accomplishments Summary
 
