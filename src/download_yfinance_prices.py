@@ -1,6 +1,8 @@
 """
 download_yfinance_prices.py
 ===========================
+Author: Jai Sharma
+
 Builds the universe of equities and downloads historical OHLCV price data
 for the S&P 500 + TSX 60 universe plus all benchmark / sector-ETF tickers.
 
@@ -109,19 +111,34 @@ EXTRA_SYMBOLS = sorted(
 # ══════════════════════════════════════════════════════════════════════════════
 
 def read_html_with_headers(url: str):
-    """Fetch a web page with a custom User-Agent and parse all HTML tables."""
+    """
+    Fetch a web page with a custom User-Agent and parse all HTML tables.
+
+    @param url: Page URL to request.
+    @return: List of parsed HTML tables.
+    """
     r = requests.get(url, headers=HEADERS, timeout=30)
     r.raise_for_status()
     return pd.read_html(StringIO(r.text))
 
 
 def to_yfinance_us_ticker(symbol: str) -> str:
-    """Convert an S&P 500 ticker to yfinance format (dots → hyphens, e.g. BRK.B → BRK-B)."""
+    """
+    Convert an S&P 500 ticker to yfinance format.
+
+    @param symbol: Raw US ticker symbol.
+    @return: yfinance-compatible US ticker symbol.
+    """
     return symbol.replace(".", "-").strip()
 
 
 def to_yfinance_ca_ticker(symbol: str) -> str:
-    """Append .TO suffix to TSX tickers if not already present (required by yfinance)."""
+    """
+    Append the `.TO` suffix to a TSX ticker when needed.
+
+    @param symbol: Raw Canadian ticker symbol.
+    @return: yfinance-compatible Canadian ticker symbol.
+    """
     symbol = symbol.strip()
     if symbol.endswith(".TO"):
         return symbol
@@ -129,7 +146,12 @@ def to_yfinance_ca_ticker(symbol: str) -> str:
 
 
 def clean_sector_name(sector: str) -> str:
-    """Normalise a sector string — returns 'Unknown' for NaN values."""
+    """
+    Normalize a sector string, falling back to `Unknown` for missing values.
+
+    @param sector: Raw sector value.
+    @return: Cleaned sector name.
+    """
     if pd.isna(sector):
         return "Unknown"
     return str(sector).strip()
@@ -150,6 +172,8 @@ def fetch_sp500_constituents() -> pd.DataFrame:
     Returns a DataFrame with columns:
         symbol, raw_symbol, company, sector, sub_industry,
         country, market_benchmark, sector_benchmark
+
+    @return: S&P 500 constituent metadata dataframe.
     """
     tables = read_html_with_headers(SP500_URL)
     df = tables[0].copy()  # first table on the page is always the constituent list
@@ -181,6 +205,8 @@ def fetch_tsx60_constituents() -> pd.DataFrame:
     columns, which is more robust than relying on table index (page layout changes).
 
     Returns the same column schema as fetch_sp500_constituents.
+
+    @return: TSX 60 constituent metadata dataframe.
     """
     tables = read_html_with_headers(TSX60_URL)
 
@@ -219,6 +245,8 @@ def build_universe_metadata() -> pd.DataFrame:
 
     Deduplicates on symbol in case a stock appears in both indices (rare but
     possible for cross-listed names), then sorts for deterministic output.
+
+    @return: Combined and deduplicated universe metadata dataframe.
     """
     sp500 = fetch_sp500_constituents()
     tsx60 = fetch_tsx60_constituents()
@@ -243,6 +271,11 @@ def download_one(symbol: str, start_date: str, end_date: str) -> pd.DataFrame:
 
     Returns a DataFrame sorted by date with columns:
         date, symbol, open, high, low, close, adjusted_close, volume
+
+    @param symbol: Ticker symbol to download.
+    @param start_date: Inclusive start date for the history window.
+    @param end_date: Exclusive end date for the history window.
+    @return: Daily OHLCV dataframe for the ticker.
     """
     df = yf.download(
         symbol,
@@ -286,6 +319,12 @@ def download_symbols(symbols, start_date: str, end_date: str, output_dir: Path):
     written at the end for easy re-run of failed tickers.
 
     Returns (successes, failures) where failures is a list of (symbol, error) tuples.
+
+    @param symbols: Iterable of ticker symbols to download.
+    @param start_date: Inclusive start date for the history window.
+    @param end_date: Exclusive end date for the history window.
+    @param output_dir: Directory where per-symbol CSVs and manifests are written.
+    @return: Tuple of successful symbols and failure records.
     """
     successes = []
     failures  = []
@@ -328,6 +367,8 @@ def main():
     Downloads the full universe (equities + benchmarks + sector ETFs).
     Benchmarks and sector ETFs are included because they are used as feature
     denominators in the ML pipeline (market-relative returns, beta, etc.).
+
+    @return: None.
     """
     # Build and save universe metadata first
     universe = build_universe_metadata()

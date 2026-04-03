@@ -1,6 +1,8 @@
 """
 fetch_fundamentals.py
 =====================
+Author: Jai Sharma
+
 Downloads quarterly fundamental data (income statement + balance sheet) for
 your S&P 500 + TSX 60 universe via yfinance and builds a time-aware feature
 dataset ready for merging into the stage-1 modeling pipeline.
@@ -80,6 +82,9 @@ def fetch_ticker_statements(symbol: str) -> dict:
     Fetch quarterly income statement and balance sheet for one ticker.
     Returns a dict with keys 'income' and 'balance' (DataFrames, index=metric,
     columns=quarter-end dates) or empty DataFrames on failure.
+
+    @param symbol: Ticker symbol to fetch from yfinance.
+    @return: Dictionary containing quarterly income and balance statement data.
     """
     empty = {"income": pd.DataFrame(), "balance": pd.DataFrame()}
     try:
@@ -112,6 +117,10 @@ def compute_ticker_features(symbol: str, data: dict) -> pd.DataFrame:
       debt_to_equity        — total debt / stockholders' equity
       interest_coverage     — EBIT / interest expense  (>2 = healthy, <1 = danger)
       current_ratio         — current assets / current liabilities
+
+    @param symbol: Ticker symbol represented by the statements.
+    @param data: Raw statement dictionary returned by `fetch_ticker_statements`.
+    @return: Time-indexed quarterly feature dataframe for the ticker.
     """
     income  = data.get("income",  pd.DataFrame())
     balance = data.get("balance", pd.DataFrame())
@@ -260,6 +269,9 @@ def build_fundamental_features(symbols: list[str]) -> pd.DataFrame:
     """
     Fetch statements for all symbols, compute features, and combine into a
     single DataFrame indexed by (symbol, report_available_date).
+
+    @param symbols: List of ticker symbols to process.
+    @return: Combined fundamentals feature dataframe.
     """
     all_frames = []
     n = len(symbols)
@@ -328,6 +340,12 @@ def main():
         sym_df  = pd.read_csv(DATA_PATH, usecols=["symbol", "country"])
         # yfinance uses different suffixes for TSX stocks: BNS → BNS.TO
         def to_yf_symbol(row):
+            """
+            Convert a metadata row into the yfinance ticker format.
+
+            @param row: Metadata row containing `symbol` and `country`.
+            @return: yfinance-compatible ticker symbol.
+            """
             if str(row.get("country", "")).upper() in ("CA", "CAN", "CANADA"):
                 s = str(row["symbol"])
                 return s if s.endswith(".TO") else s + ".TO"

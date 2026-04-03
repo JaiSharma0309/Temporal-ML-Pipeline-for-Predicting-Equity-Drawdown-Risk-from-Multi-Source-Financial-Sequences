@@ -1,6 +1,8 @@
 """
 fetch_short_interest.py
 =======================
+Author: Jai Sharma
+
 Downloads FINRA bi-monthly short interest position data for US-listed equities
 and saves a cleaned, combined parquet file ready for feature engineering.
 
@@ -49,6 +51,10 @@ def fetch_year(year: int, session: requests.Session) -> pd.DataFrame:
     """
     Fetch all consolidated short interest records for a calendar year.
     Paginates automatically using the Record-Total response header.
+
+    @param year: Calendar year to fetch.
+    @param session: Requests session configured for the FINRA API.
+    @return: Raw short-interest dataframe for the requested year.
     """
     start_date = f"{year}-01-01"
     end_date   = f"{year}-12-31"
@@ -115,6 +121,9 @@ def standardise_columns(df: pd.DataFrame) -> pd.DataFrame:
         settlement_date   — settlement date of the report
         short_interest    — total short interest (shares)
         market            — exchange code
+
+    @param df: Raw FINRA response dataframe.
+    @return: Cleaned dataframe with standardized column names and types.
     """
     col_map = {
         "symbolCode":                  "symbol",
@@ -148,6 +157,13 @@ def standardise_columns(df: pd.DataFrame) -> pd.DataFrame:
 # ── main fetch loop ────────────────────────────────────────────────────────────
 
 def fetch_all(start_year: int = 2016, end_year: int | None = None) -> pd.DataFrame:
+    """
+    Fetch, standardize, and combine FINRA short-interest data across years.
+
+    @param start_year: First calendar year to include.
+    @param end_year: Last calendar year to include. Defaults to the current year.
+    @return: Combined short-interest dataframe across all requested years.
+    """
     if end_year is None:
         end_year = datetime.date.today().year
 
@@ -195,6 +211,11 @@ def fetch_all(start_year: int = 2016, end_year: int | None = None) -> pd.DataFra
 # ── entry point ────────────────────────────────────────────────────────────────
 
 def main():
+    """
+    Run the FINRA short-interest download workflow from the command line.
+
+    @return: None.
+    """
     parser = argparse.ArgumentParser(description="Fetch FINRA short interest data.")
     parser.add_argument("--start", type=int, default=2016,
                         help="First year to fetch (default: 2016)")

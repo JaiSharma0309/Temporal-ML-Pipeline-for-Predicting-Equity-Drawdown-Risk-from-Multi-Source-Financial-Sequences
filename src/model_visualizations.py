@@ -1,6 +1,8 @@
 """
 model_visualizations.py
 =======================
+Author: Jai Sharma
+
 Creates three evaluation visuals for stage-1 drawdown-risk models:
 
 1) Top-decile lift by walk-forward fold (bar chart)
@@ -69,6 +71,9 @@ def fold_sort_key(fold_label: str) -> int:
     Supports labels like:
       - val_2020-2020
       - val_2020–2020
+
+    @param fold_label: Fold label string to parse.
+    @return: First year found in the label, or 9999 if none is present.
     """
     match = re.search(r"(\d{4})", str(fold_label))
     return int(match.group(1)) if match else 9999
@@ -78,8 +83,7 @@ def load_walk_forward() -> pd.DataFrame:
     """
     Load walk-forward CV results and keep classifier rows only.
 
-    Returns:
-        DataFrame with folds sorted by extracted year.
+    @return: Classifier-only walk-forward results sorted by fold year.
     """
     df = pd.read_csv(WALK_FWD_PATH)
     df = df[df["model_type"] == "classifier"].copy()
@@ -92,8 +96,8 @@ def plot_top_decile_lift_by_fold(df: pd.DataFrame) -> None:
     """
     Create a bar chart of lift@10% by fold for selected classifier models.
 
-    Args:
-        df: Classifier-only walk-forward CV DataFrame.
+    @param df: Classifier-only walk-forward CV dataframe.
+    @return: None.
     """
     d = df[df["model"].isin(MODELS_FOR_FOLD_PLOTS)].copy()
 
@@ -119,8 +123,8 @@ def plot_fold_by_fold_roc_pr(df: pd.DataFrame) -> None:
     """
     Create side-by-side bar charts for fold ROC AUC and PR AUC.
 
-    Args:
-        df: Classifier-only walk-forward CV DataFrame.
+    @param df: Classifier-only walk-forward CV dataframe.
+    @return: None.
     """
     d = df[df["model"].isin(MODELS_FOR_FOLD_PLOTS)].copy()
 
@@ -163,13 +167,9 @@ def cumulative_lift_curve(y_true: np.ndarray, y_score: np.ndarray) -> tuple[np.n
     """
     Compute cumulative gains/lift curve coordinates from labels and scores.
 
-    Args:
-        y_true: Binary labels (1 = event, 0 = non-event).
-        y_score: Model risk scores, higher = riskier.
-
-    Returns:
-        x: Fraction of population screened (0..1)
-        y: Fraction of events captured (0..1)
+    @param y_true: Binary labels where 1 indicates an event.
+    @param y_score: Model scores where larger values indicate higher risk.
+    @return: Tuple of x-coordinates and captured-event fractions.
     """
     order = np.argsort(-y_score)
     y_sorted = y_true[order]
@@ -191,6 +191,9 @@ def load_predictions(model_name: str) -> tuple[np.ndarray, np.ndarray]:
     Expected file format:
         results/stage1/tables/{model_name}_test_predictions.csv
     with columns including `y_true` and `y_score`.
+
+    @param model_name: Model name used in the prediction filename.
+    @return: Tuple of true labels and model scores.
     """
     path = TABLES_DIR / f"{model_name}_test_predictions.csv"
     df = pd.read_csv(path)
@@ -203,6 +206,10 @@ def load_prediction_df(model_name: str, split: str = "test") -> pd.DataFrame:
 
     Expected file:
         results/stage1/tables/{model_name}_{split}_predictions.csv
+
+    @param model_name: Model name used in the prediction filename.
+    @param split: Dataset split name to load.
+    @return: Prediction dataframe for the requested model and split.
     """
     path = TABLES_DIR / f"{model_name}_{split}_predictions.csv"
     return pd.read_csv(path)
@@ -211,6 +218,9 @@ def load_prediction_df(model_name: str, split: str = "test") -> pd.DataFrame:
 def get_best_classifier_name(default: str = BEST_TEST_MODEL) -> str:
     """
     Resolve the best classifier name from disk, falling back to default.
+
+    @param default: Fallback model name if no saved file is found.
+    @return: Best classifier name resolved from disk or the fallback value.
     """
     if BEST_MODEL_PATH.exists():
         name = BEST_MODEL_PATH.read_text().strip()
@@ -224,6 +234,8 @@ def plot_test_cumulative_lift_curve() -> None:
     Plot test-set cumulative lift curve for best model vs baseline.
 
     Also marks the top-10% operating point for the best model.
+
+    @return: None.
     """
     y_true_best, y_score_best = load_predictions(BEST_TEST_MODEL)
     y_true_base, y_score_base = load_predictions(BASELINE_MODEL)
@@ -262,6 +274,9 @@ def build_decile_table(df: pd.DataFrame) -> pd.DataFrame:
 
     Returns one row per decile with count, event count, event rate, and lift.
     Decile 1 = highest risk scores.
+
+    @param df: Prediction dataframe containing `y_true` and `y_score`.
+    @return: Decile summary dataframe.
     """
     out = df.copy().sort_values("y_score", ascending=False).reset_index(drop=True)
     n = len(out)
@@ -286,6 +301,10 @@ def build_decile_table(df: pd.DataFrame) -> pd.DataFrame:
 def plot_test_decile_event_rate(df_test: pd.DataFrame, model_name: str) -> pd.DataFrame:
     """
     Plot event rate by score decile (1=highest risk), with base-rate baseline.
+
+    @param df_test: Test prediction dataframe.
+    @param model_name: Model name for plot titling and output context.
+    @return: Decile summary dataframe used for plotting.
     """
     dec = build_decile_table(df_test)
     base_rate = float(df_test["y_true"].mean())
@@ -315,6 +334,10 @@ def plot_test_capture_vs_workload(df_test: pd.DataFrame, model_name: str) -> pd.
 
     X-axis is workload (fraction of names reviewed, top-scored first).
     Y-axis is fraction of all drawdown events captured.
+
+    @param df_test: Test prediction dataframe.
+    @param model_name: Model name for plot titling and output context.
+    @return: Coverage-versus-capture summary dataframe.
     """
     d = df_test.sort_values("y_score", ascending=False).reset_index(drop=True)
     y = d["y_true"].to_numpy()
@@ -362,6 +385,12 @@ def write_business_impact_summary(
 ) -> None:
     """
     Write a concise markdown summary of operational model impact.
+
+    @param model_name: Name of the evaluated model.
+    @param df_test: Test prediction dataframe.
+    @param deciles: Decile summary dataframe.
+    @param capture_table: Coverage-versus-capture summary dataframe.
+    @return: None.
     """
     y = df_test["y_true"].to_numpy()
     s = df_test["y_score"].to_numpy()
@@ -430,6 +459,8 @@ def main() -> None:
 
     Reads walk-forward metrics and prediction files, creates all three plots,
     and writes them to `results/stage1/plots/` + `results/stage1/reports/`.
+
+    @return: None.
     """
     sns.set_theme(style="whitegrid", context="talk")
 

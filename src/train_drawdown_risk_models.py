@@ -1,6 +1,8 @@
 """
 train_drawdown_risk_models.py
 =============================
+Author: Jai Sharma
+
 Time-aware ML pipeline for predicting 60-day equity drawdown risk across
 the S&P 500 + TSX 60 universe (2016–2025).
 
@@ -124,7 +126,13 @@ VERBOSE = False
 
 
 def vprint(*args, **kwargs):
-    """Print only when verbose mode is enabled."""
+    """
+    Print only when verbose mode is enabled.
+
+    @param args: Positional arguments forwarded to `print`.
+    @param kwargs: Keyword arguments forwarded to `print`.
+    @return: None.
+    """
     if VERBOSE:
         print(*args, **kwargs)
 
@@ -244,16 +252,41 @@ class RegimeVolTransformer(BaseEstimator, TransformerMixin):
     Output: (n, 1) float binary column  {0.0, 1.0}
     """
     def __init__(self, quantile: float = 0.70):
+        """
+        Initialize the volatility-threshold transformer.
+
+        @param quantile: Quantile used to determine the elevated-volatility cutoff.
+        @return: None.
+        """
         self.quantile = quantile
 
     def fit(self, X, y=None):
+        """
+        Fit the volatility threshold from the input data.
+
+        @param X: Input volatility values.
+        @param y: Unused target array, present for sklearn compatibility.
+        @return: Fitted transformer instance.
+        """
         self.threshold_ = float(np.nanquantile(X, self.quantile))
         return self
 
     def transform(self, X):
+        """
+        Convert raw volatility values into an elevated-volatility flag.
+
+        @param X: Input volatility values.
+        @return: Binary numpy array indicating elevated volatility.
+        """
         return (np.asarray(X) > self.threshold_).astype(float)
 
     def get_feature_names_out(self, input_features=None):
+        """
+        Return output feature names for sklearn compatibility.
+
+        @param input_features: Optional input feature names.
+        @return: Array containing the derived feature name.
+        """
         return np.array(["regime_vol_elevated"])
 
 
@@ -269,6 +302,9 @@ def add_regime_features(df: pd.DataFrame) -> tuple[pd.DataFrame, list]:
 
     regime_vol_elevated is handled separately inside each sklearn Pipeline via
     RegimeVolTransformer so it is fitted on X_train only.
+
+    @param df: Modeling dataframe.
+    @return: Tuple of augmented dataframe and newly added regime feature names.
     """
     df = df.copy()
     df["regime_mkt_uptrend"] = (df["mkt_ret_120d"] > 0).astype(float)
@@ -289,6 +325,11 @@ def add_cross_sectional_ranks(
     For each feature, compute the percentile rank within the cross-section on
     each date (0 = lowest, 1 = highest).  No lookahead: ranks are computed
     groupby date, using only stocks present on that date.
+
+    @param df: Modeling dataframe.
+    @param features: Feature names to rank cross-sectionally.
+    @param date_col: Date column used to define each cross-section.
+    @return: Tuple of augmented dataframe and rank feature names.
     """
     df = df.copy()
     rank_cols = []
@@ -324,6 +365,10 @@ def build_short_interest_features(
                             for that specific stock, regardless of the absolute level
 
     All features are ranked cross-sectionally in load_and_prepare_data.
+
+    @param si_raw: Raw short-interest dataframe.
+    @param price_df: Daily price dataframe used for date alignment.
+    @return: Tuple of merged short-interest feature dataframe and feature names.
     """
     si = (
         si_raw
@@ -359,6 +404,13 @@ def build_short_interest_features(
 
     # Rolling 1-year z-score of SIR (24 bi-monthly periods ≈ 1 year)
     def rolling_zscore(s, window=24):
+        """
+        Compute a rolling z-score for one time series.
+
+        @param s: Input series to normalize.
+        @param window: Rolling lookback window length.
+        @return: Rolling z-score series.
+        """
         m   = s.rolling(window, min_periods=6).mean()
         std = s.rolling(window, min_periods=6).std().clip(lower=1e-8)
         return (s - m) / std
@@ -390,6 +442,10 @@ def build_fundamental_features(
     The 45-day lag ensures no lookahead: for a row on date T, we only use
     reports whose `report_available_date` ≤ T, meaning earnings that were
     already public by that date.
+
+    @param fund_raw: Raw quarterly fundamentals dataframe.
+    @param price_df: Daily price dataframe used for date alignment.
+    @return: Tuple of merged fundamentals dataframe and feature names.
     """
     fund = fund_raw.copy()
     fund["report_available_date"] = pd.to_datetime(fund["report_available_date"])
@@ -428,6 +484,11 @@ def print_merge_coverage(df: pd.DataFrame, feature_cols: list[str], label: str) 
 
     A row is counted as "covered" if at least one column in `feature_cols`
     is non-null after the merge.
+
+    @param df: Dataframe after the feature merge.
+    @param feature_cols: Feature columns to check for coverage.
+    @param label: Human-readable label for the feature block.
+    @return: None.
     """
     if not feature_cols:
         print(f"    [coverage] {label}: no feature columns found")
@@ -464,6 +525,8 @@ def load_and_prepare_data() -> tuple[pd.DataFrame, list]:
     Returns (enriched_df, all_numeric_features).
     All feature engineering runs on the full df before any split so that
     cross-sectional ranks are computed consistently across the entire universe.
+
+    @return: Tuple of prepared dataframe and numeric feature list.
     """
     df = pd.read_csv(DATA_PATH)
     df[DATE_COL] = pd.to_datetime(df[DATE_COL])
@@ -537,6 +600,9 @@ def apply_train_embargo(df: pd.DataFrame) -> pd.DataFrame:
     Rows near the train/val boundary have labels computed from early 2022 prices
     (the start of the rate-hike bear market), which would leak the val-period
     distribution into training.  Removing them eliminates this boundary leakage.
+
+    @param df: Training dataframe before embargoing.
+    @return: Embargoed training dataframe.
     """
     cutoff = pd.Timestamp(TRAIN_END) - pd.Timedelta(days=EMBARGO_CALENDAR_DAYS)
     return df[df[DATE_COL] <= cutoff].copy()
@@ -549,6 +615,10 @@ def purge_overlapping_labels(df: pd.DataFrame, stride: int = PURGE_STRIDE) -> pd
     Consecutive daily rows share 59 out of 60 label-window days, making them
     nearly identical targets.  Keeping only 1 row per `stride` trading days per
     stock dramatically reduces this without discarding the full history.
+
+    @param df: Training dataframe to purge.
+    @param stride: Trading-day spacing used when sub-sampling each symbol.
+    @return: Purged training dataframe.
     """
     df = df.copy().sort_values([DATE_COL, "symbol"])
     df["_cc"] = df.groupby("symbol").cumcount()
@@ -563,6 +633,9 @@ def split_data(df: pd.DataFrame):
     Train:      up to TRAIN_END, with embargo + purge applied.
     Validation: VAL_START – VAL_END  (2022–2023, rate-hike + soft landing).
     Test:       TEST_START onward     (2024–2025, held-out, never used for selection).
+
+    @param df: Fully prepared modeling dataframe.
+    @return: Tuple of train, validation, and test dataframes.
     """
     train_df = df[df[DATE_COL] <= pd.Timestamp(TRAIN_END)].copy()
     val_df   = df[(df[DATE_COL] >= pd.Timestamp(VAL_START)) &
@@ -596,6 +669,12 @@ def walk_forward_splits(
     the CV reproduces the exact data conditions of the final model.
 
     Returns a list of (train_df, val_df, fold_label) tuples.
+
+    @param df: Fully prepared modeling dataframe.
+    @param initial_train_years: Initial training window length in years.
+    @param val_years: Validation window length in years.
+    @param step_years: Window expansion step in years.
+    @return: List of walk-forward fold tuples.
     """
     df = df.sort_values(DATE_COL)
     min_date     = df[DATE_COL].min()
@@ -638,6 +717,10 @@ def make_standard_preprocessor(numeric_features: list, scale_numeric: bool) -> C
     Categorical:    most-frequent imputation + one-hot encoding.
     regime_vol:     single column passed through RegimeVolTransformer, which
                     fits a 70th-percentile threshold on X_train only.
+
+    @param numeric_features: Numeric feature column names.
+    @param scale_numeric: Whether to standard-scale numeric features.
+    @return: Configured sklearn column transformer.
     """
     num_steps = [("imputer", SimpleImputer(strategy="median", keep_empty_features=True))]
     if scale_numeric:
@@ -667,6 +750,9 @@ def make_histgb_preprocessor(numeric_features: list) -> ColumnTransformer:
     ordinal-encoded categoricals via its categorical_features parameter, which
     allows it to split on category boundaries rather than treating each level
     as an independent binary feature.
+
+    @param numeric_features: Numeric feature column names.
+    @return: Configured sklearn column transformer for HGB models.
     """
     return ColumnTransformer([
         ("num", Pipeline([
@@ -698,13 +784,31 @@ class AveragingEnsemble:
     calls model.predict_proba(X)[:, 1].
     """
     def __init__(self, models: list):
+        """
+        Initialize the averaging ensemble with fitted classifiers.
+
+        @param models: List of fitted classifier-like models.
+        @return: None.
+        """
         self.models = models
 
     def predict_proba(self, X):
+        """
+        Average positive-class probabilities across member models.
+
+        @param X: Feature matrix to score.
+        @return: Two-column class-probability array.
+        """
         avg = np.mean([m.predict_proba(X)[:, 1] for m in self.models], axis=0)
         return np.column_stack([1 - avg, avg])
 
     def predict(self, X):
+        """
+        Convert averaged probabilities into hard class predictions.
+
+        @param X: Feature matrix to score.
+        @return: Integer class predictions.
+        """
         return (self.predict_proba(X)[:, 1] >= 0.5).astype(int)
 
 
@@ -734,6 +838,10 @@ def _make_hgb_estimator(cls, nf: list):
     early_stopping is disabled because sklearn's internal random validation
     split has overlapping-label serial correlation, which causes spurious early
     stops on financial time-series data.
+
+    @param cls: HistGradientBoosting estimator class to instantiate.
+    @param nf: Numeric feature names used to locate categorical columns.
+    @return: Configured HistGradientBoosting estimator instance.
     """
     # Categorical columns sit immediately after the numeric block in the
     # ColumnTransformer output — compute their integer positions here.
@@ -819,12 +927,9 @@ def build_pipeline(config: dict, nf: list) -> Pipeline:
     """
     Assemble a two-step sklearn Pipeline from a model config entry.
 
-    Args:
-        config: one entry from CLF_CONFIGS or REG_CONFIGS
-        nf:     list of numeric feature column names
-
-    Returns:
-        Unfitted Pipeline with steps [("preprocessor", ...), ("model", ...)].
+    @param config: One entry from `CLF_CONFIGS` or `REG_CONFIGS`.
+    @param nf: Numeric feature column names.
+    @return: Unfitted pipeline with preprocessing and model steps.
     """
     if config["prep"] == "histgb":
         prep = make_histgb_preprocessor(nf)
@@ -834,12 +939,22 @@ def build_pipeline(config: dict, nf: list) -> Pipeline:
 
 
 def get_clf_models(nf: list) -> dict:
-    """Return a fresh {name: unfitted Pipeline} dict for all classifiers."""
+    """
+    Build fresh classifier pipelines for all configured classification models.
+
+    @param nf: Numeric feature column names.
+    @return: Mapping of classifier names to unfitted pipelines.
+    """
     return {c["name"]: build_pipeline(c, nf) for c in CLF_CONFIGS}
 
 
 def get_reg_models(nf: list) -> dict:
-    """Return a fresh {name: unfitted Pipeline} dict for all regressors."""
+    """
+    Build fresh regression pipelines for all configured regression models.
+
+    @param nf: Numeric feature column names.
+    @return: Mapping of regressor names to unfitted pipelines.
+    """
     return {c["name"]: build_pipeline(c, nf) for c in REG_CONFIGS}
 
 
@@ -848,12 +963,25 @@ def get_reg_models(nf: list) -> dict:
 # ══════════════════════════════════════════════════════════════════════════════
 
 def safe_auc(y_true, y_score) -> float:
-    """Return ROC AUC, or NaN if only one class is present (avoids sklearn ValueError)."""
+    """
+    Return ROC AUC, or NaN if only one class is present.
+
+    @param y_true: True binary labels.
+    @param y_score: Model scores for the positive class.
+    @return: ROC AUC value or NaN.
+    """
     return roc_auc_score(y_true, y_score) if len(np.unique(y_true)) >= 2 else np.nan
 
 
 def evaluate_predictions(y_true, y_pred, y_score) -> dict:
-    """Compute a standard set of binary classification metrics and return as a dict."""
+    """
+    Compute a standard set of binary classification metrics.
+
+    @param y_true: True binary labels.
+    @param y_pred: Predicted binary labels.
+    @param y_score: Model scores for the positive class.
+    @return: Dictionary of evaluation metrics.
+    """
     tn, fp, fn, tp = confusion_matrix(y_true, y_pred).ravel()
     return {
         "precision": precision_score(y_true, y_pred, zero_division=0),
@@ -871,6 +999,11 @@ def score_clf(model, X, y) -> tuple:
 
     y_score is the positive-class probability if predict_proba is available,
     otherwise the hard prediction cast to float.
+
+    @param model: Fitted classifier-like model.
+    @param X: Feature matrix to score.
+    @param y: True binary labels.
+    @return: Tuple of metrics dictionary, predictions, and scores.
     """
     y_pred  = model.predict(X)
     y_score = (model.predict_proba(X)[:, 1]
@@ -888,6 +1021,12 @@ def score_reg(model, X, y_reg, y_clf) -> tuple:
     binary drawdown label using the same AUC / lift metrics as classifiers.
 
     Returns (metrics_dict, risk_scores_array).
+
+    @param model: Fitted regression model.
+    @param X: Feature matrix to score.
+    @param y_reg: Continuous regression target values.
+    @param y_clf: Binary classification labels used for ranking metrics.
+    @return: Tuple of metrics dictionary and derived risk scores.
     """
     pred_drawdown = model.predict(X)
     risk_score    = -pred_drawdown   # flip: more negative prediction = higher rank
@@ -907,7 +1046,14 @@ def score_reg(model, X, y_reg, y_clf) -> tuple:
 
 
 def evaluate_at_threshold(y_true, y_score, threshold) -> dict:
-    """Binarise y_score at `threshold` and return evaluate_predictions metrics."""
+    """
+    Binarize model scores at a threshold and compute classification metrics.
+
+    @param y_true: True binary labels.
+    @param y_score: Model scores for the positive class.
+    @param threshold: Decision threshold applied to `y_score`.
+    @return: Dictionary of evaluation metrics at the threshold.
+    """
     return evaluate_predictions(y_true, (y_score >= threshold).astype(int), y_score)
 
 
@@ -917,6 +1063,13 @@ def threshold_sweep(y_true, y_score, model_name, split_name, thresholds=None) ->
 
     Useful for selecting an operating point when a hard yes/no label is required
     (e.g. generating alerts).  Not needed when using the model purely for ranking.
+
+    @param y_true: True binary labels.
+    @param y_score: Model scores for the positive class.
+    @param model_name: Model identifier to store in the output.
+    @param split_name: Dataset split name to store in the output.
+    @param thresholds: Optional iterable of thresholds to evaluate.
+    @return: Dataframe of per-threshold metrics.
     """
     thresholds = thresholds or np.arange(0.05, 0.55, 0.05)
     rows = []
@@ -934,6 +1087,11 @@ def top_k_event_rate(y_true, y_score, k_frac=0.10) -> dict:
     This is the primary business metric: if we flag the top decile of stocks
     by risk score, what fraction of them actually draw down 20%+?  The lift
     (= top-k event rate / base rate) tells us how much better than random we are.
+
+    @param y_true: True binary labels.
+    @param y_score: Model scores used for ranking.
+    @param k_frac: Fraction of highest-scored rows to inspect.
+    @return: Dictionary summarizing top-k enrichment metrics.
     """
     y_true  = np.asarray(y_true)
     y_score = np.asarray(y_score)
@@ -953,7 +1111,17 @@ def top_k_event_rate(y_true, y_score, k_frac=0.10) -> dict:
 # ══════════════════════════════════════════════════════════════════════════════
 
 def save_predictions(df_split, model_name, split_name, y_true, y_pred, y_score):
-    """Save per-row predictions (date, symbol, true label, predicted score) to CSV."""
+    """
+    Save per-row predictions for a dataset split to CSV.
+
+    @param df_split: Source dataframe for the split being saved.
+    @param model_name: Model identifier used in the output filename.
+    @param split_name: Dataset split name used in the output filename.
+    @param y_true: True labels.
+    @param y_pred: Predicted labels or `None` when not applicable.
+    @param y_score: Model scores saved alongside the labels.
+    @return: None.
+    """
     out = df_split[["date", "symbol", "country", "sector"]].copy()
     out["y_true"]  = np.asarray(y_true)
     out["y_pred"]  = np.asarray(y_pred) if y_pred is not None else np.nan
@@ -962,7 +1130,12 @@ def save_predictions(df_split, model_name, split_name, y_true, y_pred, y_score):
 
 
 def save_logistic_coefficients(pipeline):
-    """Save LR feature coefficients sorted by absolute magnitude to CSV."""
+    """
+    Save logistic-regression coefficients sorted by absolute magnitude.
+
+    @param pipeline: Fitted logistic-regression pipeline.
+    @return: None.
+    """
     feature_names = pipeline.named_steps["preprocessor"].get_feature_names_out()
     coefs = pipeline.named_steps["model"].coef_[0]
     pd.DataFrame({
@@ -975,7 +1148,13 @@ def save_logistic_coefficients(pipeline):
 
 
 def save_rf_importances(pipeline, filename: str = "random_forest_feature_importances.csv"):
-    """Save Random Forest feature importances sorted descending to CSV."""
+    """
+    Save random-forest feature importances sorted in descending order.
+
+    @param pipeline: Fitted random-forest pipeline.
+    @param filename: Output CSV filename.
+    @return: None.
+    """
     feature_names = pipeline.named_steps["preprocessor"].get_feature_names_out()
     importances   = pipeline.named_steps["model"].feature_importances_
     pd.DataFrame({
@@ -994,6 +1173,10 @@ def run_walk_forward_cv(df: pd.DataFrame, numeric_features: list) -> pd.DataFram
     temporal folds, each covering a distinct market regime.  The fold-average
     metrics are a much more honest estimate of generalisation than the single
     final val split.
+
+    @param df: Fully prepared modeling dataframe.
+    @param numeric_features: Numeric feature column names.
+    @return: Walk-forward cross-validation metrics dataframe.
     """
     print("\nWalk-forward CV...")
 
@@ -1131,12 +1314,17 @@ def run_final_split(df: pd.DataFrame, numeric_features: list, has_reg: bool) -> 
     Covers three steps:
       1. Classification — Dummy, LR, RF, HGB, then RF+LR ensemble.
       2. Regression     — Ridge, RF-Reg, HGB-Reg (skipped if has_reg=False).
-      3. Reporting      — picks the best model on val, saves metrics / predictions /
+    3. Reporting      — picks the best model on val, saves metrics / predictions /
                           feature importances / threshold sweep / lift CSVs to OUT_DIR.
 
     Nothing in this function is used to make modelling decisions — model
     selection is based on walk-forward CV.  This split gives the final
     held-out numbers reported in the README.
+
+    @param df: Fully prepared modeling dataframe.
+    @param numeric_features: Numeric feature column names.
+    @param has_reg: Whether regression targets and models are available.
+    @return: None.
     """
     train_df, val_df, test_df = split_data(df)
 

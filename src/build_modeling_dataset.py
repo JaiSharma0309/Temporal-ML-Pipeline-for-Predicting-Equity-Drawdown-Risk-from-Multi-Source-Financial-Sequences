@@ -1,6 +1,8 @@
 """
 Build the stage 1 modeling dataset for the equity drawdown risk project.
 
+Author: Jai Sharma
+
 This script reads raw daily OHLCV price files downloaded from yfinance,
 loads universe metadata with country/sector/benchmark mappings, engineers
 rolling technical and benchmark-relative features, creates the future
@@ -34,6 +36,9 @@ def load_price_file(path: Path) -> pd.DataFrame:
     The function checks that the expected OHLCV columns are present,
     parses the date column, sorts rows chronologically, and returns a
     clean per-symbol price dataframe ready for feature engineering.
+
+    @param path: Path to the raw price CSV file.
+    @return: Standardized per-symbol price dataframe.
     """
     df = pd.read_csv(path)
 
@@ -53,6 +58,8 @@ def load_metadata() -> pd.DataFrame:
     This metadata provides the symbol-level mappings needed later in the
     pipeline, including country, sector, market benchmark, and sector
     benchmark. Duplicate symbols are removed before returning the table.
+
+    @return: Deduplicated metadata dataframe.
     """
     meta = pd.read_csv(META_PATH)
 
@@ -76,6 +83,10 @@ def trailing_max_drawdown(series: pd.Series, window: int) -> pd.Series:
 
     For each date, this measures the most negative drawdown relative to
     the rolling maximum price over the specified window.
+
+    @param series: Price series to analyze.
+    @param window: Rolling lookback window in periods.
+    @return: Series of trailing maximum drawdowns.
     """
     roll_max = series.rolling(window).max()
     drawdown = series / roll_max - 1.0
@@ -88,6 +99,10 @@ def downside_volatility(returns: pd.Series, window: int) -> pd.Series:
     Only negative returns are kept when estimating the rolling standard
     deviation, which makes this a downside-risk measure rather than a
     general volatility measure.
+
+    @param returns: Return series to analyze.
+    @param window: Rolling lookback window in periods.
+    @return: Series of downside volatility values.
     """
     neg = returns.clip(upper=0)
     return neg.rolling(window).std()
@@ -98,6 +113,10 @@ def upside_volatility(returns: pd.Series, window: int) -> pd.Series:
 
     Only positive returns are kept when estimating the rolling standard
     deviation, which allows comparison between upside and downside risk.
+
+    @param returns: Return series to analyze.
+    @param window: Rolling lookback window in periods.
+    @return: Series of upside volatility values.
     """
     pos = returns.clip(lower=0)
     return pos.rolling(window).std()
@@ -108,6 +127,10 @@ def days_since_last_high(series: pd.Series, window: int) -> pd.Series:
 
     Within each rolling window, this returns the number of periods since
     the last maximum value, which acts as a simple drawdown-duration feature.
+
+    @param series: Price series to analyze.
+    @param window: Rolling lookback window in periods.
+    @return: Series of elapsed periods since the last rolling high.
     """
     return series.rolling(window).apply(lambda x: len(x) - 1 - np.argmax(x), raw=True)
 
@@ -118,12 +141,22 @@ def rolling_slope(log_price: pd.Series, window: int) -> pd.Series:
     The slope is computed within each rolling window using a centered time
     index, giving a compact measure of recent price trend direction and
     strength.
+
+    @param log_price: Log-price series to analyze.
+    @param window: Rolling lookback window in periods.
+    @return: Series of rolling slope estimates.
     """
     x = np.arange(window, dtype=float)
     x_centered = x - x.mean()
     denom = np.sum(x_centered ** 2)
 
     def _slope(arr):
+        """
+        Compute the centered linear slope for one rolling window.
+
+        @param arr: Rolling-window log-price values.
+        @return: Slope estimate for the window or NaN if values are invalid.
+        """
         if np.any(~np.isfinite(arr)):
             return np.nan
         return np.dot(x_centered, arr - arr.mean()) / denom
@@ -138,6 +171,9 @@ def compute_future_label(df: pd.DataFrame) -> pd.DataFrame:
     finds the minimum future adjusted close, computes the forward drawdown,
     and labels the row as 1 if the stock experiences at least a
     DRAWDOWN_THRESHOLD decline over that future window.
+
+    @param df: Per-symbol price dataframe.
+    @return: Dataframe with future drawdown label columns added.
     """
     px = df["adjusted_close"]
 
@@ -164,6 +200,9 @@ def compute_base_features(df: pd.DataFrame) -> pd.DataFrame:
     including returns, volatility, downside/upside asymmetry, distance from
     highs, moving-average ratios, trend slopes, skewness, gap features,
     and intraday range features.
+
+    @param df: Per-symbol price dataframe.
+    @return: Dataframe with engineered base features added.
     """
     px = df["adjusted_close"]
     opn = df["open"]
@@ -230,6 +269,12 @@ def add_benchmark_features(df: pd.DataFrame, benchmark_df: pd.DataFrame, prefix:
     function merges benchmark returns and risk measures by date, then
     computes relative return, volatility, drawdown, slope, beta,
     correlation, and idiosyncratic volatility features.
+
+    @param df: Equity dataframe receiving benchmark-relative features.
+    @param benchmark_df: Benchmark dataframe aligned by date.
+    @param prefix: Prefix used when naming benchmark feature columns.
+    @param benchmark_symbol: Symbol of the benchmark being merged.
+    @return: Dataframe with benchmark-relative features added.
     """
     bench_cols = [
         "date",
@@ -299,6 +344,8 @@ def main():
     metadata mappings, creates the future downside label, filters to rows
     with complete modeling inputs, and writes the full dataset, clean
     modeling dataset, and per-symbol summary outputs to disk.
+
+    @return: None.
     """
     files = sorted([p for p in RAW_DIR.glob("*.csv") if not p.name.startswith("_")])
     if not files:
