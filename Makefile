@@ -1,4 +1,4 @@
-.PHONY: setup pipeline train visuals clean-results
+.PHONY: setup pipeline train train-sequence visuals clean-results
 
 setup:
 	python -m pip install -r requirements.txt
@@ -13,6 +13,9 @@ pipeline:
 
 train:
 	python src/train_drawdown_risk_models.py
+
+train-sequence:
+	python src/train_sequence_model_pytorch.py
 
 visuals:
 	python src/model_visualizations.py

@@ -4,6 +4,8 @@ Time-aware machine learning pipeline for predicting whether an equity will exper
 
 This project builds a multi-source dataset from price action, benchmark-relative features, short interest, and fundamentals; trains multiple time-aware models; and evaluates both statistical quality and practical ranking value.
 
+The core baseline is a leakage-aware sklearn tabular pipeline. The repo also includes an optional PyTorch sequence model that learns from rolling per-stock feature windows.
+
 ## Project Metadata
 
 - **Author:** Jai Sharma
@@ -38,6 +40,7 @@ The target is:
 - Daily price ingestion and benchmark mapping
 - Feature engineering for technical, relative, short-interest, and fundamental signals
 - Leakage-aware temporal model training and validation
+- Optional PyTorch sequence modeling over rolling equity histories
 - Business-facing evaluation plots and summary outputs
 
 ## File Structure
@@ -68,6 +71,7 @@ The target is:
     ├── fetch_fundamentals.py
     ├── fetch_short_interest.py
     ├── model_visualizations.py
+    ├── train_sequence_model_pytorch.py
     └── train_drawdown_risk_models.py
 ```
 
@@ -87,6 +91,9 @@ The target is:
 
 - `src/train_drawdown_risk_models.py`  
   Merges all feature blocks, applies temporal safeguards, runs walk-forward CV and final split evaluation, and writes metrics and artifacts.
+
+- `src/train_sequence_model_pytorch.py`
+  Trains a PyTorch GRU classifier on rolling per-stock feature windows and saves comparable metrics/predictions.
 
 - `src/model_visualizations.py`  
   Creates performance visuals and a short business-impact summary.
@@ -178,6 +185,43 @@ Output:
 - Model families:
   - Classifiers: Dummy, Logistic Regression, Random Forest, HistGradientBoosting, RF+LR ensemble
   - Regressors: Ridge, RF Regressor, HGB Regressor
+  - Sequence classifier: PyTorch GRU over rolling feature windows
+
+## PyTorch Sequence Model
+
+The optional PyTorch stage treats each stock as a time series rather than a single tabular row. For each prediction date, it builds a rolling window of the previous `lookback` trading days of engineered features and trains a GRU classifier to predict the same 60-day drawdown label.
+
+Run:
+
+```bash
+python src/train_sequence_model_pytorch.py
+```
+
+Useful development run:
+
+```bash
+python src/train_sequence_model_pytorch.py --epochs 1 --max-train-samples 2000 --max-eval-samples 1000
+```
+
+Or:
+
+```bash
+make train-sequence
+```
+
+Outputs:
+
+- `results/stage1/pytorch_sequence_gru.pt`
+- `results/stage1/tables/pytorch_sequence_gru_metrics.csv`
+- `results/stage1/tables/pytorch_sequence_gru_training_history.csv`
+- `results/stage1/tables/pytorch_sequence_gru_*_predictions.csv`
+
+Design notes:
+
+- Uses the same target and temporal split logic as the sklearn pipeline.
+- Fits numeric imputation/scaling on training endpoints only.
+- Builds sequence windows lazily, so it does not materialize one giant 3D tensor.
+- Supports `--device auto`, `cpu`, `cuda`, or `mps`.
 
 ## Current Results
 
@@ -243,6 +287,7 @@ If data already exists locally:
 
 ```bash
 make train
+make train-sequence
 make visuals
 ```
 
@@ -264,10 +309,13 @@ python src/fetch_fundamentals.py --overwrite
 # 5. Train and evaluate
 python src/train_drawdown_risk_models.py
 
-# 6. Detailed logs
+# 6. Optional: train PyTorch sequence model
+python src/train_sequence_model_pytorch.py
+
+# 7. Detailed logs
 python src/train_drawdown_risk_models.py --verbose
 
-# 7. Plot results
+# 8. Plot results
 python src/model_visualizations.py
 ```
 
@@ -284,11 +332,12 @@ Core dependencies:
 - `requests`
 - `yfinance`
 - `pyarrow`
+- `torch`
 
 Install manually if needed:
 
 ```bash
-pip install pandas numpy scikit-learn matplotlib seaborn requests yfinance pyarrow
+pip install pandas numpy scikit-learn matplotlib seaborn requests yfinance pyarrow torch
 ```
 
 ## Caveats
